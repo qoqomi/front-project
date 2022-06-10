@@ -3,20 +3,19 @@ import styled from "styled-components";
 
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate();
-
+  
   return (
     <Wrap>
-      <H4>로그인</H4>
+      <H4>회원가입</H4>
       <Input type="text" placeholder="아이디" />
-      <Input type="password" placeholder="비밀번호(6자리 이상)" />
+      <Input type="password" placeholder="비밀번호(6자리 이상)"/>
+      <Input type="password" placeholder="비밀번호 확인"/>
+      <Input type="text" placeholder="닉네임" />
       <Button onClick={() => {
-        navigate('../');
-      }}>로그인 하기</Button>
-      <P>회원이 아니시라면?</P>
-      <Button onClick={() => {
-        navigate('../signup');
+        navigate('../login');
+        alert('가입을 축하 합니다!');
       }}>회원가입 하기</Button>
     </Wrap>
   );
@@ -54,8 +53,4 @@ color:#fff;
 cursor:pointer;
 `
 
-const P = styled.p`
-margin:50px auto 0;
-`
-
-export default Login;
+export default Signup;
