@@ -29,7 +29,6 @@ const Wrap = styled.div`
   max-width: 500px;
   margin: 40px auto 0;
   padding: 40px 20px;
-  border: 3px solid #eee;
   border-radius: 20px;
   text-align: center;
   background-color: #fff;
@@ -63,7 +62,7 @@ const Button = styled.button`
   margin: 20px auto 0;
   border: none;
   border-radius: 6px;
-  background-color: #000;
+  background-color: #212529;
   color: #fff;
   cursor: pointer;
 `;

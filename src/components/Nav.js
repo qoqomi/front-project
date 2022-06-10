@@ -21,13 +21,6 @@ const Nav = () => {
       <User>
         <Button
           onClick={() => {
-            navigate("./signup");
-          }}
-        >
-          회원가입
-        </Button>
-        <Button
-          onClick={() => {
             navigate("./login");
           }}
         >
