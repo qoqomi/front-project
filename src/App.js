@@ -6,7 +6,7 @@ import Write from "./pages/Write";
 function App() {
   return (
     <div className="App">
-      <></>
+      <>페이지</>
     </div>
   );
 }
