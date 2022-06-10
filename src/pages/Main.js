@@ -47,7 +47,7 @@ const Main = () => {
           <Name>
             <span>닉네임</span>
             <div>
-              <FontAwesomeIcon icon={faHeart} />
+              <FontAwesomeIcon icon={faHeart} style={{ color: "#d1180b" }} />
             </div>
           </Name>
         </Aarticle>
