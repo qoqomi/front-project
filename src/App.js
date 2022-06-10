@@ -8,7 +8,8 @@ import Nav from "./components/Nav";
 function App() {
   return (
     <div className="App">
-      <Nav/>
+      <Nav />
+
       <Routes>
         <Route path="/" exact element={<Main />}></Route>
         <Route path="/login" exact element={<Login />}></Route>
