@@ -26,6 +26,13 @@ const Nav = () => {
         >
           로그인
         </Button>
+        <ButtonWrite
+          onClick={() => {
+            navigate("./Write");
+          }}
+        >
+          새 글 작성
+        </ButtonWrite>
       </User>
     </Navbar>
   );
@@ -55,11 +62,41 @@ const User = styled.div`
 `;
 
 const Button = styled.button`
-  margin: 0 6px;
+  height: 30px;
+  width: 70px;
+  border-radius: 20px;
+  background-color: #f8f9fa;
+  border: 1px solid white;
+  transition: all 0.25s ease-in 0s;
+  font-weight: bold;
+
+  /* margin: 0 6px;
   padding: 4px 10px;
   border: none;
-  border-radius: 6px;
-  background-color: #fff;
+  border-radius: 6px; */
+  &:hover {
+    background-color: #1e1e1e;
+    color: white;
+  }
+`;
+const ButtonWrite = styled.button`
+  height: 30px;
+  width: 70px;
+  border-radius: 20px;
+  background-color: #f8f9fa;
+  border: 1px solid white;
+  transition: all 0.25s ease-in 0s;
+  font-weight: bold;
+  margin-left: 10px;
+
+  /* margin: 0 6px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 6px; */
+  &:hover {
+    background-color: #1e1e1e;
+    color: white;
+  }
 `;
 
 export default Nav;

@@ -23,6 +23,7 @@ const Header = () => {
           />
         </Link>
         <Button>로그인</Button>
+        <ButtonNew>새글작성</ButtonNew>
       </Container>
     </>
   );
@@ -43,7 +44,7 @@ const Button = styled.button`
   height: 30px;
   width: 70px;
   border-radius: 20px;
-  background-color: #212529;
+  background-color: #f8f9fa;
   border: 1px solid;
   color: white;
   text-transform: uppercase;
@@ -57,7 +58,28 @@ const Button = styled.button`
 
   &:hover {
     background-color: white;
-    color: #212529;
+    color: #1e1e1e;
+  }
+`;
+const ButtonNew = styled.button`
+  height: 30px;
+  width: 70px;
+  border-radius: 20px;
+  background-color: #f8f9fa;
+  border: 1px solid;
+  color: white;
+  text-transform: uppercase;
+  transition: all 0.25s ease-in 0s;
+  font-weight: bold;
+  position: fixed;
+
+  right: 20px;
+
+  margin: 2px 5px 0px 0px;
+
+  &:hover {
+    background-color: white;
+    color: #1e1e1e;
   }
 `;
 export default Header;
