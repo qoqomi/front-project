@@ -19,6 +19,7 @@ width:100%;
 max-width:500px;
 margin:0 auto;
 text-align:center;
+background-color:#f8f9fa;
 `
 
 const H4 = styled.h4`
