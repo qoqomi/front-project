@@ -9,53 +9,64 @@ const Nav = () => {
 
   return (
     <Navbar>
-      <Logo src={logo} onClick={() => {
-        navigate('./');
-      }}/>
+      <Logo
+        src={logo}
+        onClick={() => {
+          navigate("./");
+        }}
+      />
       {/* <User>
           <Button>로그아웃</Button>
       </User> */}
       <User>
-          <Button onClick={() => {
-            navigate('./signup');
-          }}>회원가입</Button>
-          <Button onClick={() => {
-            navigate('./login');
-          }}>로그인</Button>
+        <Button
+          onClick={() => {
+            navigate("./signup");
+          }}
+        >
+          회원가입
+        </Button>
+        <Button
+          onClick={() => {
+            navigate("./login");
+          }}
+        >
+          로그인
+        </Button>
       </User>
     </Navbar>
   );
 };
 
 const Navbar = styled.div`
-position:relative;
-height:60px;
-margin:0;
-background-color:#000;
-font-size:1.2em;
-color:#fff;
-`
+  position: relative;
+  height: 60px;
+  margin: 0;
+  background-color: #1e1e1e;
+  font-size: 1.2em;
+  color: #fff;
+`;
 
 const Logo = styled.img`
-position:absolute;
-top:10px;
-max-height:40px;
-left:20px;
-cursor:pointer;
-`
+  position: absolute;
+  top: 10px;
+  max-height: 40px;
+  left: 20px;
+  cursor: pointer;
+`;
 
 const User = styled.div`
-position: absolute;
-top:14px;
-right:20px;
-`
+  position: absolute;
+  top: 14px;
+  right: 20px;
+`;
 
 const Button = styled.button`
-margin:0 6px;
-padding:4px 10px;
-border:none;
-border-radius:6px;
-background-color:#fff;
-`
+  margin: 0 6px;
+  padding: 4px 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #fff;
+`;
 
 export default Nav;
