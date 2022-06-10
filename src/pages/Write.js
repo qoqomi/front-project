@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
+import { useNavigate } from "react-router-dom";
+
 const Write = () => {
+  const navigate = useNavigate();
+
   return (
     <Wrap>
       <H4>TIL 작성</H4>
@@ -9,7 +13,9 @@ const Write = () => {
       <Textarea placeholder="내용을 입력해주세요"></Textarea>
       <Label>대표 이미지 선택</Label>
       <Input type="file" placeholder="제목" />
-      <Button>등록</Button>
+      <Button onClick={() => {
+        navigate('../');
+      }}>등록</Button>
     </Wrap>
   );
 };

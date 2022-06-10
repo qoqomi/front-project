@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -10,7 +11,9 @@ const Login = () => {
       <H4>로그인</H4>
       <Input type="text" placeholder="아이디" />
       <Input type="password" placeholder="비밀번호(6자리 이상)" />
-      <Button>로그인 하기</Button>
+      <Button onClick={() => {
+        navigate('../');
+      }}>로그인 하기</Button>
       <P>회원이 아니시라면?</P>
       <Button onClick={() => {
         navigate('../signup');
