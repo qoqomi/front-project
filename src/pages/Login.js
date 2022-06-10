@@ -49,7 +49,7 @@ height:40px;
 margin:20px auto 0;
 border:none;
 border-radius:6px;
-background-color:#000;
+background-color:#212529;
 color:#fff;
 cursor:pointer;
 `

@@ -17,9 +17,6 @@ const Nav = () => {
       </User> */}
       <User>
           <Button onClick={() => {
-            navigate('./signup');
-          }}>회원가입</Button>
-          <Button onClick={() => {
             navigate('./login');
           }}>로그인</Button>
       </User>
@@ -31,7 +28,7 @@ const Navbar = styled.div`
 position:relative;
 height:60px;
 margin:0;
-background-color:#000;
+background-color:#212529;
 font-size:1.2em;
 color:#fff;
 `
