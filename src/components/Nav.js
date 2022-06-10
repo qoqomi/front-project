@@ -9,13 +9,19 @@ const Nav = () => {
 
   return (
     <Navbar>
-      <Logo src={logo} />
+      <Logo src={logo} onClick={() => {
+        navigate('./');
+      }}/>
       {/* <User>
           <Button>로그아웃</Button>
       </User> */}
       <User>
-          <Button>회원가입</Button>
-          <Button>로그인</Button>
+          <Button onClick={() => {
+            navigate('./signup');
+          }}>회원가입</Button>
+          <Button onClick={() => {
+            navigate('./login');
+          }}>로그인</Button>
       </User>
     </Navbar>
   );

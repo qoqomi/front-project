@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-const Sign = () => {
+const Signup = () => {
   return (
     <Wrap>
       <H4>회원가입</H4>
-      <Input type="text" placeholder="아이디(email)" />
+      <Input type="text" placeholder="아이디" />
       <Input type="password" placeholder="비밀번호(6자리 이상)"/>
       <Input type="password" placeholder="비밀번호 확인"/>
-      {/* <Input type="text" placeholder="닉네임" /> */}
+      <Input type="text" placeholder="닉네임" />
       <Button>회원가입 하기</Button>
     </Wrap>
   );
@@ -45,4 +45,4 @@ color:#fff;
 cursor:pointer;
 `
 
-export default Sign;
+export default Signup;
