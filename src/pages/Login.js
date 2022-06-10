@@ -54,6 +54,7 @@ const Input = styled.input`
   &:focus {
     outline: none;
     border-bottom: 1px solid #1e1e1e;
+    transition-duration: 1s;
   }
 `;
 
