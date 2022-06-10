@@ -48,6 +48,13 @@ const Input = styled.input`
   max-width: 200px;
   height: 30px;
   margin: 20px auto;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background-color: #f8f9fa;
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid #1e1e1e;
+  }
 `;
 
 const Button = styled.button`

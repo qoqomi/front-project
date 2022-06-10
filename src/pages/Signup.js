@@ -42,7 +42,14 @@ const Input = styled.input`
   width: 100%;
   max-width: 200px;
   height: 30px;
+  border: none;
   margin: 20px auto;
+  border-bottom: 1px solid #ccc;
+  background-color: #f8f9fa;
+  &:focus {
+    outline: none;
+    border-bottom: 1px solid #1e1e1e;
+  }
 `;
 
 const Button = styled.button`
