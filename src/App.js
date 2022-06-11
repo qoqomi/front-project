@@ -1,11 +1,31 @@
+import React from "react";
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Write from "./pages/Write";
 import Nav from "./components/Nav";
+//axios
+import axios from "axios";
 
 function App() {
+  React.useEffect(() => {
+    something();
+    // getPosts();
+  }, []);
+
+  const something = () => {
+    axios
+      .get("/restaurant")
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        // 에러 핸들링
+        console.log(error);
+      });
+  };
   return (
     <div className="App">
       <Nav />
