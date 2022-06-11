@@ -1,17 +1,43 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
+import {
+  faHeart,
+  faPlus,
+  faPenFancy,
+  faDeleteLeft,
+  faFilePen,
+} from "@fortawesome/free-solid-svg-icons";
+import { keyframes } from "styled-components";
 
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-
-<FontAwesomeIcon icon="fa-solid fa-heart" />;
 const Main = () => {
   return (
     <Total>
       <Container>
         <Aarticle>
           <Contents>
-            <h4>제목입니다</h4>
+            <TopName>
+              <h4>제목입니다</h4>
+              <Name>
+                <span>
+                  {/* <FontAwesomeIcon icon="fa-solid fa-file-pen" /> */}
+                  <FontAwesomeIcon
+                    icon={faFilePen}
+                    style={{ color: "#1e1e1e", fontSize: "15px" }}
+                  />
+                </span>
+                <FontAwesomeIcon
+                  icon={faDeleteLeft}
+                  style={{
+                    color: "#1e1e1e",
+                    marginLeft: "10px",
+                    fontSize: "18px",
+                  }}
+                />
+              </Name>
+            </TopName>
+
             <p>
               내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.
               내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다.
@@ -21,7 +47,7 @@ const Main = () => {
           <Name>
             <span>닉네임</span>
             <div>
-              <FontAwesomeIcon icon={faHeart} />
+              <FontAwesomeIcon icon={faHeart} style={{ color: "#d1180b" }} />
             </div>
           </Name>
         </Aarticle>
@@ -80,4 +106,10 @@ const Name = styled.div`
   box-sizing: inherit;
   font-size: 0.75rem;
 `;
+
+const TopName = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export default Main;
