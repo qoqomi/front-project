@@ -17,6 +17,13 @@ const Nav = () => {
       />
       {/* <User>
           <Button>로그아웃</Button>
+          <ButtonWrite
+            onClick={() => {
+              navigate("./Write");
+            }}
+          >
+            새 글 작성
+          </ButtonWrite>
       </User> */}
       <User>
         <Button
@@ -26,13 +33,6 @@ const Nav = () => {
         >
           로그인
         </Button>
-        <ButtonWrite
-          onClick={() => {
-            navigate("./Write");
-          }}
-        >
-          새 글 작성
-        </ButtonWrite>
       </User>
     </Navbar>
   );
@@ -63,7 +63,6 @@ const User = styled.div`
 
 const Button = styled.button`
   height: 30px;
-  width: 70px;
   border-radius: 20px;
   background-color: #f8f9fa;
   border: 1px solid white;
@@ -81,7 +80,6 @@ const Button = styled.button`
 `;
 const ButtonWrite = styled.button`
   height: 30px;
-  width: 70px;
   border-radius: 20px;
   background-color: #f8f9fa;
   border: 1px solid white;

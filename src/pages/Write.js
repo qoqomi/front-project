@@ -12,7 +12,8 @@ const Write = () => {
       <Input type="text" placeholder="제목" />
       <Textarea placeholder="내용을 입력해주세요"></Textarea>
       <Label>대표 이미지 선택</Label>
-      <Input type="file" accept="image/*" placeholder="제목" />
+      {/* <Input type="file" accept="image/*" placeholder="제목" /> */}
+      <Input type="text" placeholder="이미지 url" />
       <Button
         onClick={() => {
           navigate("../");
