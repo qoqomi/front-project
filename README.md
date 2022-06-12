@@ -3,24 +3,28 @@
 메인 페이지, 게시글 작성: 유승연<br />
 회원가입, 로그인, 네비게이션바: 이병수
 
+## 프로젝트 기간
+
+- 2022.06.10~2022.06.17
+
 ## 백엔드 서버와 초기 연결(axios,CORS)
 
 - 백엔드와 데이터 초기 연결을 위한 과정
 
 1. app.js (import axios from "axios")
 
-```
+```js
 const something = () => {
-    axios
-      .get("/restaurant")
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        // 에러 핸들링
-        console.log(error);
-      });
-  };
+  axios
+    .get("/restaurant")
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      // 에러 핸들링
+      console.log(error);
+    });
+};
 ```
 
 2. setupProxy.js 생성
@@ -60,4 +64,5 @@ module.exports = function (app) {
 
 ---
 
+Ref
 [CORS](https://evan-moon.github.io/2020/05/21/about-cors/)
