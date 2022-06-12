@@ -10,22 +10,36 @@ import Nav from "./components/Nav";
 import axios from "axios";
 
 function App() {
-  React.useEffect(() => {
-    something();
-    // getPosts();
-  }, []);
+  //실제 연결되는 서버
+  // React.useEffect(() => {
+  //   something();
 
-  const something = () => {
-    axios
-      .get("/restaurant")
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        // 에러 핸들링
-        console.log(error);
-      });
-  };
+  // }, []);
+
+  // const something = () => {
+  //   axios
+  //     .get("/restaurant")
+  //     .then((response) => {
+  //       console.log(response.data);
+  //     })
+  //     .catch(function (error) {
+  //       // 에러 핸들링
+  //       console.log(error);
+  //     });
+  // };
+
+  //목 서버
+  // React.useEffect(() => {
+  //   callSomething();
+  // }, []);
+  // const callSomething = () => {
+  //   axios({
+  //     url: "http://localhost:5003/notice_board", // 통신할 웹문서
+  //     method: "get", // 통신할 방식
+  //   }).then((response) => {
+  //     console.log(response);
+  //   });
+  // };
   return (
     <div className="App">
       <Nav />

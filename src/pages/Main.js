@@ -4,12 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import {
   faHeart,
-  faPlus,
-  faPenFancy,
   faDeleteLeft,
   faFilePen,
 } from "@fortawesome/free-solid-svg-icons";
-import { keyframes } from "styled-components";
 
 const Main = () => {
   return (
@@ -21,7 +18,6 @@ const Main = () => {
               <h4>제목입니다</h4>
               <Name>
                 <span>
-                  {/* <FontAwesomeIcon icon="fa-solid fa-file-pen" /> */}
                   <FontAwesomeIcon
                     icon={faFilePen}
                     style={{ color: "#1e1e1e", fontSize: "15px" }}
