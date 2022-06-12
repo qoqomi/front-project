@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import {
   faHeart,
   faPlus,
@@ -9,48 +11,53 @@ import {
   faDeleteLeft,
   faFilePen,
 } from "@fortawesome/free-solid-svg-icons";
-import { keyframes } from "styled-components";
+// import { keyframes } from "styled-components";
 
 const Main = () => {
+  const post_list = useSelector((state) => state.post.list);
+  console.log(post_list)
+
   return (
     <Total>
       <Container>
-        <Aarticle>
-          <Contents>
-            <TopName>
-              <h4>제목입니다</h4>
-              <Name>
-                <span>
-                  {/* <FontAwesomeIcon icon="fa-solid fa-file-pen" /> */}
-                  <FontAwesomeIcon
-                    icon={faFilePen}
-                    style={{ color: "#1e1e1e", fontSize: "15px" }}
-                  />
-                </span>
-                <FontAwesomeIcon
-                  icon={faDeleteLeft}
-                  style={{
-                    color: "#1e1e1e",
-                    marginLeft: "10px",
-                    fontSize: "18px",
-                  }}
-                />
-              </Name>
-            </TopName>
+        {post_list.map((list, idx) => {
+          return (
+            <Aarticle key={idx}>
+              <Contents>
+                <TopName>
+                  <h4>{list.tit}</h4>
+                  <Name>
+                    <span>
+                      {/* <FontAwesomeIcon icon="fa-solid fa-file-pen" /> */}
+                      <FontAwesomeIcon
+                        icon={faFilePen}
+                        style={{ color: "#1e1e1e", fontSize: "15px" }}
+                      />
+                    </span>
+                    <FontAwesomeIcon
+                      icon={faDeleteLeft}
+                      style={{
+                        color: "#1e1e1e",
+                        marginLeft: "10px",
+                        fontSize: "18px",
+                      }}
+                    />
+                  </Name>
+                </TopName>
 
-            <p>
-              내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.
-              내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다.
-              내용입니다. 내용입니다.
-            </p>
-          </Contents>
-          <Name>
-            <span>닉네임</span>
-            <div>
-              <FontAwesomeIcon icon={faHeart} style={{ color: "#d1180b" }} />
-            </div>
-          </Name>
-        </Aarticle>
+                <p>
+                  {list.txt}
+                </p>
+              </Contents>
+              <Name>
+                <span>{list.name}</span>
+                <div>
+                  <FontAwesomeIcon icon={faHeart} style={{ color: "#d1180b" }} />
+                </div>
+              </Name>
+            </Aarticle>
+          )
+        })}
       </Container>
     </Total>
   );
