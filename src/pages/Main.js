@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 
 import {
   faHeart,
-  faPlus,
-  faPenFancy,
+  // faPlus,
+  // faPenFancy,
   faDeleteLeft,
   faFilePen,
 } from "@fortawesome/free-solid-svg-icons";
