@@ -21,7 +21,7 @@ const Login = () => {
       <P>회원이 아니시라면?</P>
       <Button
         onClick={() => {
-          navigate("/register");
+          navigate("/api/user/signup");
         }}
       >
         회원가입 하기
