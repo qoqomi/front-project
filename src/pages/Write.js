@@ -1,26 +1,62 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { addPost, addPostFB, actionCreators } from "../redux/modules/post";
+import { actionCreators as postActions } from "../redux/modules/post";
 const Write = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [title, setTitle] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [fileName, setFileName] = React.useState("");
+
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    if (name === "title") {
+      setTitle(value);
+    } else if (name === "url") {
+      setFileName(value);
+    } else if (name === "description") {
+      setDescription(value);
+    }
+  };
+
+  const onClick = () => {
+    dispatch(postActions.addPostFB(title, description, fileName));
+    navigate("../");
+  };
 
   return (
     <Wrap>
       <H4>TIL 작성</H4>
-      <Input type="text" placeholder="제목" />
-      <Textarea placeholder="내용을 입력해주세요"></Textarea>
+      <Input
+        type="text"
+        name="title"
+        value={title}
+        onChange={onChange}
+        placeholder="제목"
+      />
+      <Textarea
+        type="text"
+        name="description"
+        value={description}
+        onChange={onChange}
+        placeholder="내용을 입력해주세요"
+      ></Textarea>
       <Label>대표 이미지 선택</Label>
       {/* <Input type="file" accept="image/*" placeholder="제목" /> */}
-      <Input type="text" placeholder="이미지 url" />
-      <Button
-        onClick={() => {
-          navigate("../");
-        }}
-      >
-        등록
-      </Button>
+      <Input
+        width="100%"
+        type="text"
+        name="url"
+        placeholder="이미지 url"
+        value={fileName}
+        margin="0"
+        onChange={onChange}
+      />
+      <></>
+      <Button onClick={onClick}>등록</Button>
     </Wrap>
   );
 };

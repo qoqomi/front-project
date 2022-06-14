@@ -15,7 +15,7 @@ const Signup = () => {
       <Input type="text" placeholder="닉네임" />
       <Button
         onClick={() => {
-          navigate("../login");
+          navigate("/api/user/login");
           alert("가입을 축하 합니다!");
         }}
       >

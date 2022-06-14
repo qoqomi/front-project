@@ -19,14 +19,16 @@ const Nav = () => {
         <Button>로그아웃</Button>
         <ButtonWrite
           onClick={() => {
-            navigate("./Write");
+            navigate("/notice/write");
           }}
         >
           새 글 작성
         </ButtonWrite>
+      </User>
+      <User>
         <Button
           onClick={() => {
-            navigate("./login");
+            navigate("/api/user/login");
           }}
         >
           로그인
