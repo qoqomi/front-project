@@ -8,7 +8,6 @@ import Write from "./pages/Write";
 import Nav from "./components/Nav";
 import { actionCreators as postActions } from "./redux/modules/post";
 import { useNavigate } from "react-router-dom";
-import { getPostFB } from "./redux/modules/post";
 import { useDispatch } from "react-redux";
 //axios
 import axios from "axios";

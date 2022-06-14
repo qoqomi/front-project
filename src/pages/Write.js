@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addPost, addPostFB, actionCreators } from "../redux/modules/post";
 import { actionCreators as postActions } from "../redux/modules/post";
+
 const Write = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
