@@ -26,7 +26,7 @@ const getPostFB = () => {
     let post_list = [];
 
     axios
-      .get("http://localhost:5002/notice_board")
+      .get("http://15.165.160.84/api/user/login")
       .then(function (response) {
         // console.log("게시물조회", response.data);
         let postDB = response.data;
@@ -48,7 +48,7 @@ const addPostFB = (title, description, fileName) => {
   return function (dispatch, getState) {
     axios
       .post(
-        "  http://localhost:5002/notice_board",
+        "  http://15.165.160.84/api/user/login",
         {
           title: title,
           description: description,
