@@ -1,25 +1,42 @@
 import axios from "axios";
+
 const LOAD = "post/LOAD";
+const CREATE = "post/CREATE";
+const DELETE = "post/DELETE";
+const MODIFY = "post/MODIFY";
 
 export function setPost(post_list) {
   return { type: LOAD, post_list };
 }
 
+export function addPost(post_create) {
+  return { type: CREATE, post_create };
+}
+
+export function modifyPost(post_modify) {
+  return { type: MODIFY, post_modify };
+}
+
+export function deletePost(post_delete) {
+  return { type: DELETE, post_delete };
+}
+
 const getPostFB = () => {
   return function (dispatch, getState) {
     let post_list = [];
-    // let user = getState().user.user
-    // console.log("getPost사용자정보",user)
 
     axios
-      .get("http://localhost:5003/notice_board")
+      .get("http://localhost:5002/notice_board")
       .then(function (response) {
-        console.log("게시물조회", response.data);
-        // console.log('게시물조회',response.data);
+        // console.log("게시물조회", response.data);
         let postDB = response.data;
-
+        console.log(postDB);
         post_list.push(...postDB);
-        dispatch(setPost(post_list));
+        console.log(post_list);
+        const postreverse = post_list.reverse();
+        console.log(postreverse);
+
+        dispatch(setPost(postreverse));
       })
       .catch(function (error) {
         console.log(error);
@@ -27,32 +44,74 @@ const getPostFB = () => {
   };
 };
 
+const addPostFB = (title, description, fileName) => {
+  return function (dispatch, getState) {
+    axios
+      .post(
+        "  http://localhost:5002/notice_board",
+        {
+          title: title,
+          description: description,
+          image: fileName,
+        }
+        // {
+        //   headers: {
+        //     Authorization: `Bearer ${localStorage.getItem("token")}`,
+        //   },
+        // }
+      )
+      .then(function (res2) {
+        console.log("addPostFB res !! ", res2);
+
+        const post = {
+          title: res2.data.title,
+          description: res2.data.description,
+          image: res2.data.image,
+        };
+
+        console.log("리듀서에 보낼 post !! ", post);
+
+        dispatch(addPost(post));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+};
+
+// const doc = await addDoc(collection(db, "add"), instaram);
+// const _instagram = await getDoc(doc);
+// const data = { id: _instagram.id, ...instaram };
+
+// dispatch(createWish(data));
+
 const initialState = {
   list: [
-    {
-      title: "7번째제목입니다",
-      description: "내용이구요",
-      image: "사진입니다",
-    },
+    // {
+    //   title: "7번째제목입니다",
+    //   description: "내용이구요",
+    //   image:
+    //     "https://upload.wikimedia.org/wikipedia/commons/3/3b/Logo-GoogleFonts-color-background.png",
+    // },
   ],
 };
 
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case "post/LOAD": {
-      console.log("리듀서");
       return { list: action.post_list };
     }
-    // case "wish/CREATE": {
-    //   const new_instagram = [...state.list, action.data];
-    //   return { list: new_instagram };
-    // }
-    // case "wish/DELETE": {
-    //   const new_instagram = state.list.filter((el, idx) => {
-    //     return action.delete_data != idx;
-    //   });
-    //   return { ...state, list: new_instagram };
-    // }
+    case "post/CREATE": {
+      const new_post = [action.post_create, ...state.list];
+      return { list: new_post };
+    }
+
+    case "post/DELETE": {
+      const new_post = state.list.filter((el, idx) => {
+        return action.post_delete != idx;
+      });
+      return { ...state, list: new_post };
+    }
     default:
       return state;
   }
@@ -61,6 +120,8 @@ export default function reducer(state = initialState, action = {}) {
 const actionCreators = {
   getPostFB,
   setPost,
+  addPost,
+  addPostFB,
 };
 
 export { actionCreators };

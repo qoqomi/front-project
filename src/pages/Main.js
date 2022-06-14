@@ -6,13 +6,12 @@ import Card from "../components/Card";
 
 const Main = () => {
   const post = useSelector((state) => state.post.list);
-  console.log(post);
 
   return (
     <Total>
       <Container>
         {post.map((post, index) => {
-          return <Card key={post} {...post} />;
+          return <Card key={index} {...post} user_id={post.id} />;
         })}
       </Container>
     </Total>
