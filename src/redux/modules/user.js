@@ -204,7 +204,7 @@ export default function reducer(state = initialState, action = {}) {
     }
 }
 
-// export const actionCreators = {
-//     loginFB,
-//     loginCheckFB
-// };
+export const actionCreators = {
+    loginFB,
+    loginCheckFB
+};
