@@ -1,16 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-import { useState } from "react";
+// import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
+import { actionCreators as userActions } from "../redux/modules/user";
 import { signupDB } from '../redux/modules/user';
 
 const Signup = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
+  const is_token = localStorage.getItem("token") ? true : false;
 
   const [id, setId] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -50,6 +53,12 @@ const Signup = () => {
     }
     dispatch(signupDB(id, password, nickname))
   }
+
+  React.useEffect(() => {
+    if (is_token) {
+      dispatch(userActions.loginCheckFB());
+    }
+  }, []);
 
   return (
     <Wrap>

@@ -30,16 +30,16 @@ const getPostFB = () => {
       .then(function (response) {
         // console.log("게시물조회", response.data);
         let postDB = response.data;
-        console.log(postDB);
+        // console.log(postDB);
         post_list.push(...postDB);
-        console.log(post_list);
+        // console.log(post_list);
         const postreverse = post_list.reverse();
-        console.log(postreverse);
+        // console.log(postreverse);
 
         dispatch(setPost(postreverse));
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   };
 };
