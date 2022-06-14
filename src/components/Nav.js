@@ -63,6 +63,7 @@ const User = styled.div`
 
 const Button = styled.button`
   height: 30px;
+  margin: 5px;
   border-radius: 20px;
   background-color: #f8f9fa;
   border: 1px solid white;
@@ -80,12 +81,12 @@ const Button = styled.button`
 `;
 const ButtonWrite = styled.button`
   height: 30px;
+  margin: 5px;
   border-radius: 20px;
   background-color: #f8f9fa;
   border: 1px solid white;
   transition: all 0.25s ease-in 0s;
   font-weight: bold;
-  margin-left: 10px;
 
   /* margin: 0 6px;
   padding: 4px 10px;
