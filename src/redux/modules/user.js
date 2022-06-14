@@ -1,5 +1,9 @@
 import axios from "axios";
-import { createAction, handleActions } from "redux-actions";
+// import { createAction, handleActions } from "redux-actions";
+import { createAction } from "redux-actions";
+
+// import { actionCreators as userActions } from "../redux/modules/user";
+
 // axios.defaults.baseURL = "api/user/signup";
 axios.defaults.baseURL = "http://15.165.160.84/api/user/login";
 axios.defaults.withCredentials = true;
@@ -87,7 +91,7 @@ export const signupDB = (id, password, nickname) => {
 }
 
 // 로그인 된 상태인지 확인
-const loginCheckFB = () => {
+export const loginCheckFB = () => {
     return function (dispatch, getState, { history }) {
 
         axios.get('/api/user/me',
@@ -118,7 +122,8 @@ const loginCheckFB = () => {
     }
 }
 
-const loginFB = (id, pwd) => {
+// 로그인
+export const loginFB = (id, pwd) => {
     return function (dispatch, getState, { history }) {
 
         // axios는 axios.요청타입으로 요청을 보낼 수 있어요. 이 방식을 별칭 메서드라고 불러요.
@@ -198,3 +203,8 @@ export default function reducer(state = initialState, action = {}) {
             return state;
     }
 }
+
+// export const actionCreators = {
+//     loginFB,
+//     loginCheckFB
+// };

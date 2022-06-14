@@ -10,6 +10,9 @@ import { actionCreators as postActions } from "./redux/modules/post";
 import { useNavigate } from "react-router-dom";
 import { getPostFB } from "./redux/modules/post";
 import { useDispatch } from "react-redux";
+
+import { loginFB, loginCheckFB } from "./redux/modules/user";
+
 //axios
 import axios from "axios";
 
@@ -23,10 +26,11 @@ function App() {
     dispatch(postActions.getPostFB());
   }, []);
   //실제 연결되는 서버
-  // React.useEffect(() => {
-  //   something();
-
-  // }, []);
+  React.useEffect(() => {
+    // something();
+    loginCheckFB();
+    loginFB();
+  }, []);
   // const something = () => {
   //   axios
   //     .get("/restaurant")
