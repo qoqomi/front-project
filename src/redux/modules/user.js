@@ -14,6 +14,7 @@ import { createAction } from "redux-actions";
 // import { setCookie, deleteCookie } from "./Cookie";
 >>>>>>> Stashed changes
 
+// 06.15 최신
 // Actions
 const SET_USER = "SET_USER";
 const LOG_OUT = "LOG_OUT";
