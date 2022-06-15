@@ -77,7 +77,7 @@ export const loginFB = (username, password) => {
 }
 
 // 토큰 해독
-export const loginCheckFB = (username) => {
+export const loginCheckFB = () => {
     // return function (dispatch, getState, { history }) {
     return function (dispatch) {
         axios.get('/api/user/info',

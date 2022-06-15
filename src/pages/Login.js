@@ -19,6 +19,11 @@ const Login = () => {
     ))
   }
 
+  const loginCK = () => {
+    dispatch(loginCheckFB(
+    ))
+  }
+
   // initializeUserInfo = async () => {
   //   const loggedInfo = storage.get('loggedInfo');
   //   if(!loggedInfo) return;
@@ -56,7 +61,7 @@ const Login = () => {
       <Button
         onClick={() => {
           login();
-          loginCheckFB();
+          loginCK();
           navigate("../");
         }}
       >
