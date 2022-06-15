@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { deletePost } from "../redux/modules/post";
 import {
   faHeart,
   faDeleteLeft,
@@ -11,14 +10,14 @@ import {
 
 import { useNavigate } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
-
+import { deletePost } from "../redux/modules/post";
 const Card = ({ data }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // const { title, description, image, id, index } = props;
 
   const [images, setImages] = React.useState(data.image);
-  // console.log(data.image);
+
   return (
     <>
       <Aarticle>
@@ -47,17 +46,32 @@ const Card = ({ data }) => {
                     navigate(`/notice/write/${data.id}`);
                   }}
                 />
+                <FontAwesomeIcon
+                  icon={faDeleteLeft}
+                  style={{
+                    color: "#1e1e1e",
+                    fontSize: "15px",
+                    marginLeft: "10px",
+                  }}
+                  onClick={() => {
+                    dispatch(postActions.deleteOnePostFB(data.id));
+                    navigate("/");
+                  }}
+                />
               </span>
-              <p>{data.day}</p>
             </Name>
           </TopName>
           {images ? <p>{data.description}</p> : <P>{data.description}</P>}
         </Contents>
         <Name>
           <span>닉네임</span>
-          <div>
-            <FontAwesomeIcon icon={faHeart} style={{ color: "#d1180b" }} />
-          </div>
+          <ButtomBar>
+            <span style={{ marginRight: "10px" }}>{data.day}</span>
+            <FontAwesomeIcon
+              icon={faHeart}
+              style={{ color: "#d1180b", marginTop: "0px", fontSize: "15px" }}
+            />
+          </ButtomBar>
         </Name>
       </Aarticle>
     </>
@@ -106,5 +120,9 @@ const P = styled.p`
   word-wrap: break-word;
   line-height: 1.2em;
   height: 6em; /* line-height 가 1.2em 이고 3라인을 자르기 때문에 height는 1.2em * 3 = 3.6em */
+`;
+
+const ButtomBar = styled.div`
+  display: flex;
 `;
 export default Card;

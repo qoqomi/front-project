@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -31,6 +31,7 @@ const Write = (props) => {
       setTitle(value);
     } else if (name === "url") {
       setFileName(value);
+      console.log(fileName);
     } else if (name === "description") {
       setDescription(value);
     }
@@ -38,9 +39,14 @@ const Write = (props) => {
 
   const addOnClick = () => {
     let day = new Date().toString().slice(0, 21).split(" ").join();
-
-    dispatch(postActions.addPostFB(title, description, fileName, day));
-    navigate("../");
+    if (!title || !description) {
+      return window.alert("내용을 입력해주세요.");
+    } else if (!description) {
+      return window.alert("내용을 입력해주세요.");
+    } else {
+      dispatch(postActions.addPostFB(title, description, fileName, day));
+      navigate("../");
+    }
   };
 
   const editOnClick = () => {
