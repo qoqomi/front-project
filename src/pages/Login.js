@@ -10,14 +10,14 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [id, setId] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [id, setId] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   const login = () => {
-    // dispatch(loginFB(
-    //   id, password
-    // ))
-  };
+    dispatch(loginFB(
+      id, password
+    ))
+  }
 
   // initializeUserInfo = async () => {
   //   const loggedInfo = storage.get('loggedInfo');
