@@ -13,6 +13,7 @@ const Nav = () => {
   // 로그아웃
   const handlelouOut = () => {
     localStorage.removeItem("token");
+    // localStorage.removeItem("username");
   }
 
   // 로그인 체크

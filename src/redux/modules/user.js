@@ -76,18 +76,21 @@ export const loginFB = (username, password) => {
     }
 }
 
-// 로그인 된 상태인지 확인
-export const loginCheckFB = () => {
+// 토큰 해독
+export const loginCheckFB = (username) => {
     // return function (dispatch, getState, { history }) {
     return function (dispatch) {
         axios.get('/api/user/info',
             {
                 headers: { 'Authorization': ` ${localStorage.getItem("token")}` }
-            }
+            },
         )
         .then(function (response) {
-            // console.log("logincheckFB !! ", response);
-            console.log(response);
+            const username = response.data
+            console.log(username);
+            localStorage.setItem("username", username)
+            console.log("logincheckFB !! ", response);
+            // console.log(response);
             // if (response.data.user) {
             if (response.data) {
                 console.log(response);
