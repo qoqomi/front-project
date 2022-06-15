@@ -1,19 +1,31 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import Card from "../components/Card";
 
 const Main = () => {
+  const [update, Setupdate] = useState([]);
+  // console.log(update);
+  // console.log("update=", update);
   const post = useSelector((state) => state.post.list);
+  // console.log("post=", post);
+  // post가 빈 배열을 만들어 초기 생성 시 useEffect가 배열 하나마다 렌더링 시켜줌으로 빈 배열을 막는다.
+  useEffect(() => {
+    Setupdate(post);
+  }, [post]);
 
   return (
     <Total>
-      <Container>
-        {post.map((post, index) => {
-          return <Card key={index} {...post} user_id={post.id} />;
-        })}
-      </Container>
+      {update === -1 ? null : (
+        <Container>
+          {update.map((item, i) => {
+            return <Card key={i} data={item} />;
+          })}
+        </Container>
+      )}
     </Total>
   );
 };
