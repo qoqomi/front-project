@@ -1,21 +1,19 @@
 import axios from "axios";
-import { createAction } from "redux-actions";
+import { createAction, handleActions } from "redux-actions";
 
 // Actions
 const SET_USER = "SET_USER";
 const LOG_OUT = "LOG_OUT";
+const GET_USER = "GET_USER";
 
 const initialState = {
-  user: {
-    userID: "",
-  },
-  is_login: false,
-  msg: "",
+  user: [],
 };
 
 // Action Creators
 const setUser = createAction(SET_USER, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
+const getUser = createAction(GET_USER, (user) => ({ user }));
 
 // export function loadWidgets() {
 //     return { type: LOAD };
@@ -134,23 +132,23 @@ export const loginCheckFB = (username) => {
 // }
 
 // Reducer
-export default function reducer(state = initialState, action = {}) {
-  switch (action.type) {
-    // case "post/LOAD": {
-    //     return { list: action.post_list }
-    // }
+// export default function reducer(state = initialState, action = {}) {
+//   switch (action.type) {
+//     case "post/LOAD": {
+//         return { list: action.post_list }
+//     }
 
-    // case "post/CREATE": {
-    //     const new_list = [...state.list];
-    //     return { list: new_list };
-    // }
+//     case "post/CREATE": {
+//         const new_list = [...state.list];
+//         return { list: new_list };
+//     }
 
-    default:
-      return state;
-  }
-}
+//     default:
+//       return state;
+//   }
+// }
 
-export const actionCreators = {
+const actionCreators = {
   loginFB,
   loginCheckFB,
 };

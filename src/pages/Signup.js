@@ -5,27 +5,34 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 // import { useDispatch, useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 
 import { actionCreators as userActions } from "../redux/modules/user";
-import { signupDB } from '../redux/modules/user';
 
 const Signup = () => {
-  // const navigate = useNavigate();
   const dispatch = useDispatch();
-  const is_token = localStorage.getItem("token") ? true : false;
 
-  const [id, setId] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [passwordCk, setPasswordCk] = React.useState('');
-  const [nickname, setNickname] = React.useState('');
+  // const is_token = localStorage.getItem("token") ? true : false;
 
-  const passwordCheck = (password) => {
-    // let _reg2 = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
-    var _reg2 = (/[0-9]/g);
+  // const passwordCheck = (password) => {
+  //   let _reg2 = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+  //   var _reg2 = (/[0-9]/g);
 
-    return _reg2.test(password);
-  }
+  //   return _reg2.test(password);
+  // }
+
+  const navigate = useNavigate();
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [passwordCk, setPasswordCk] = React.useState("");
+  const [nickname, setNickname] = React.useState("");
+
+  // const passwordCheck = (password) => {
+  //   // let _reg2 = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+  //   var _reg2 = /[0-9]/g;
+
+  //   return _reg2.test(password);
+  // };
 
   // function passwordCheck(password) {
   //   if (!/^[a-zA-Z0-9]{6,20}$/.test(password)) {
@@ -40,55 +47,65 @@ const Signup = () => {
   //   return true;
   // }
 
-  const signUpForm = (e) => {
-    e.preventDefault();
-    if (!id || !password || !passwordCk || !nickname) {
-      return window.alert('내용을 입력해주세요.')
-    }
-    if (!passwordCheck(password)) {
-      window.alert('비밀번호는 6자리 이상 입력해주세요.')
-    }
-    if (password !== passwordCk) {
-      return window.alert('비밀번호가 다릅니다.')
-    }
-    dispatch(signupDB(id, password, nickname))
-  }
+  const signUpForm = () => {
+    console.log("보낸다");
 
-  React.useEffect(() => {
-    if (is_token) {
-      dispatch(userActions.loginCheckFB());
-    }
-  }, []);
+    dispatch(createAction.signupFB(username, password, nickname, passwordCk));
+  };
+
+  // React.useEffect(() => {
+  //   if (is_token) {
+
+  //     dispatch(userActions.loginCheckFB());
+
+  //   }
+  // }, []);
 
   return (
     <Wrap>
-      {/* <form onSubmit={signUpForm}> */}
-      <form>
+      <div>
         <H4>회원가입</H4>
-        <Input type="text" required placeholder="아이디" onChange={
-          (e) => { setId(e.target.value) }
-        } />
-        <Input type="password" required placeholder="비밀번호(6자리 이상)" onChange={
-          (e) => { setPassword(e.target.value) }
-        } />
-        <Input type="password" required placeholder="비밀번호 확인" onChange={
-          (e) => { setPasswordCk(e.target.value) }
-        } />
-        <Input type="text" required placeholder="닉네임" onChange={
-          (e) => { setNickname(e.target.value) }
-        } />
-        <Button type="submit"
-          onClick={() => {
-            // navigate("../login");
-            // alert("가입을 축하 합니다!");
-            // signupDB();
-            // currentUserInfo();
-            signUpForm();
+        <Input
+          type="text"
+          required
+          placeholder="아이디"
+          onChange={(e) => {
+            setId(e.target.value);
+
+            setUsername(e.target.value);
           }}
-        >
+        />
+        <Input
+          type="password"
+          required
+          placeholder="비밀번호(6자리 이상)"
+          onChange={(e) => {
+            setPassword(e.target.value);
+
+            console.log(password);
+          }}
+        />
+        <Input
+          type="password"
+          required
+          placeholder="비밀번호 확인"
+          onChange={(e) => {
+            setPasswordCk(e.target.value);
+          }}
+        />
+        <Input
+          type="text"
+          required
+          placeholder="닉네임"
+          onChange={(e) => {
+            setNickname(e.target.value);
+          }}
+        />
+
+        <Button type="submit" onClick={signUpForm()}>
           회원가입 하기
         </Button>
-      </form>
+      </div>
     </Wrap>
   );
 };
