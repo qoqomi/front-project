@@ -1,17 +1,22 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-
 import Card from "../components/Card";
 
+import { useState, useEffect } from "react";
 const Main = () => {
   const post = useSelector((state) => state.post.list);
+  const [update, Setupdate] = useState([]);
+
+  useEffect(() => {
+    Setupdate(post);
+  }, [post]);
 
   return (
     <Total>
       <Container>
-        {post.map((post, index) => {
-          return <Card key={index} {...post} user_id={post.id} />;
+        {update.map((item, i) => {
+          return <Card key={i} data={item} />;
         })}
       </Container>
     </Total>

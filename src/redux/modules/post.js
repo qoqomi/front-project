@@ -2,7 +2,6 @@ import axios from "axios";
 
 const LOAD = "post/LOAD";
 const CREATE = "post/CREATE";
-const DELETE = "post/DELETE";
 const MODIFY = "post/MODIFY";
 
 export function setPost(post_list) {
@@ -14,11 +13,8 @@ export function addPost(post_create) {
 }
 
 export function modifyPost(post_modify) {
+  console.log("수정 시작💡", post_modify);
   return { type: MODIFY, post_modify };
-}
-
-export function deletePost(post_delete) {
-  return { type: DELETE, post_delete };
 }
 
 const getPostFB = () => {
@@ -26,15 +22,14 @@ const getPostFB = () => {
     let post_list = [];
 
     axios
-      .get("http://localhost:5001/notice_board")
+      .get("http://localhost:5001/times")
       .then(function (response) {
         // console.log("게시물조회", response.data);
         let postDB = response.data;
-        console.log(postDB);
+
         post_list.push(...postDB);
-        console.log(post_list);
+
         const postreverse = post_list.reverse();
-        console.log(postreverse);
 
         dispatch(setPost(postreverse));
       })
@@ -48,7 +43,7 @@ const addPostFB = (title, description, fileName) => {
   return function (dispatch, getState) {
     axios
       .post(
-        "http://localhost:5001/notice_board",
+        "http://localhost:5001/times",
         {
           title: title,
           description: description,
@@ -64,6 +59,7 @@ const addPostFB = (title, description, fileName) => {
         console.log("addPostFB res !! ", res2);
 
         const post = {
+          id: res2.data.id,
           title: res2.data.title,
           description: res2.data.description,
           image: res2.data.image,
@@ -79,11 +75,35 @@ const addPostFB = (title, description, fileName) => {
   };
 };
 
-// const doc = await addDoc(collection(db, "add"), instaram);
-// const _instagram = await getDoc(doc);
-// const data = { id: _instagram.id, ...instaram };
-
-// dispatch(createWish(data));
+const updateOnePostFB = (id, title, description, fileName) => {
+  return function (dispatch, getState) {
+    axios
+      .patch(
+        // postman전달부분
+        "http://localhost:5001/times/" + id,
+        {
+          title: title,
+          description: description,
+          image: fileName,
+        }
+      )
+      // 그러면 post에 있는 값도 갱신해서 리듀서에 넣어줘라
+      .then(function (res) {
+        console.log("update res !! ", res.data);
+        const post = {
+          id: id,
+          title: res.data.title,
+          description: res.data.description,
+          image: res.data.image,
+        };
+        // 리듀서에 새로운 데이터로 넣어줘라.
+        dispatch(modifyPost(post));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+};
 
 const initialState = {
   list: [
@@ -105,13 +125,18 @@ export default function reducer(state = initialState, action = {}) {
       const new_post = [action.post_create, ...state.list];
       return { list: new_post };
     }
-
-    case "post/DELETE": {
-      const new_post = state.list.filter((el, idx) => {
-        return action.post_delete != idx;
+    case "post/MODIFY": {
+      const new_post = state.list.map((le, index) => {
+        if (parseInt(action.post_modify.id) === le.id) {
+          return { ...le, ...action.post_modify };
+        } else {
+          return le;
+        }
       });
-      return { ...state, list: new_post };
+      console.log(new_post);
+      return { list: new_post };
     }
+
     default:
       return state;
   }
@@ -122,6 +147,7 @@ const actionCreators = {
   setPost,
   addPost,
   addPostFB,
+  updateOnePostFB,
 };
 
 export { actionCreators };

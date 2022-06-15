@@ -8,12 +8,14 @@ import {
   faDeleteLeft,
   faFilePen,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
-const Card = (props) => {
+const Card = ({ data }) => {
   const dispatch = useDispatch();
-  const { title, description, image, user_id } = props;
-  console.log(user_id);
-  const [images, setImages] = React.useState(image);
+  const navigate = useNavigate();
+  const [images, setImages] = React.useState(data.image);
+
+  const editOnClick = () => {};
 
   return (
     <>
@@ -28,33 +30,28 @@ const Card = (props) => {
                 height: "180px",
                 objectFit: "cover",
               }}
-              src={image}
+              src={data.image}
             />
           )}
 
           <TopName>
-            <h4>{title}</h4>
+            <h4>{data.title}</h4>
+
             <Name>
               <span>
                 <FontAwesomeIcon
                   icon={faFilePen}
                   style={{ color: "#1e1e1e", fontSize: "15px" }}
+                  onClick={() => {
+                    editOnClick();
+
+                    navigate(`/notice/write/${data.id}`);
+                  }}
                 />
               </span>
-              <FontAwesomeIcon
-                icon={faDeleteLeft}
-                style={{
-                  color: "#1e1e1e",
-                  marginLeft: "10px",
-                  fontSize: "18px",
-                }}
-                onClick={() => {
-                  dispatch(deletePost(user_id));
-                }}
-              />
             </Name>
           </TopName>
-          {images ? <p>{description}</p> : <P>{description}</P>}
+          {images ? <p>{data.description}</p> : <P>{data.description}</P>}
         </Contents>
         <Name>
           <span>닉네임</span>

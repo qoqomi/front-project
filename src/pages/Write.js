@@ -1,13 +1,21 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { addPost, addPostFB, actionCreators } from "../redux/modules/post";
 import { actionCreators as postActions } from "../redux/modules/post";
-
+import { useSelector } from "react-redux";
 const Write = () => {
+  const post = useSelector((state) => state.post.list);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { id } = useParams();
+  console.log(id);
+  const is_edit = id ? true : false;
+  //추후 검사
+  // const _post = is_edit ? post.find((p) => p.id === id) : null;
+  // console.log("_post:", _post);
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [fileName, setFileName] = React.useState("");
@@ -23,14 +31,18 @@ const Write = () => {
     }
   };
 
-  const onClick = () => {
+  const AddOnClick = () => {
     dispatch(postActions.addPostFB(title, description, fileName));
+    navigate("../");
+  };
+  const EditOnClick = () => {
+    dispatch(postActions.updateOnePostFB(id, title, description, fileName));
     navigate("../");
   };
 
   return (
     <Wrap>
-      <H4>TIL 작성</H4>
+      <H4>{is_edit ? "TIL 수정" : "TIL 작성"}</H4>
       <Input
         type="text"
         name="title"
@@ -56,8 +68,11 @@ const Write = () => {
         margin="0"
         onChange={onChange}
       />
-      <></>
-      <Button onClick={onClick}>등록</Button>
+      {is_edit ? (
+        <Button onClick={EditOnClick}>수정</Button>
+      ) : (
+        <Button onClick={AddOnClick}>등록</Button>
+      )}
     </Wrap>
   );
 };
