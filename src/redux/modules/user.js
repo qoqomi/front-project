@@ -14,7 +14,6 @@ const initialState = {
 };
 
 // Action Creators
-
 const setUser = createAction(SET_USER, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 
