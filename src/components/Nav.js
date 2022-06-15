@@ -3,13 +3,23 @@ import styled from "styled-components";
 import logo from "../images/coc_logo.png";
 
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginCheckFB } from '../redux/modules/user';
 
 const Nav = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  // 로그아웃
   const handlelouOut = () => {
     localStorage.removeItem("token");
   }
+
+  // 로그인 체크
+  // React.useEffect(() => {
+  //   dispatch(loginCheckFB(
+  //   ))
+  // }, []);
 
   return (
     <Navbar>
@@ -19,6 +29,7 @@ const Nav = () => {
           navigate("./");
         }}
       />
+      {/* {localStorage.token ? ( */}
       {localStorage.token ? (
         <User>
           <Button onClick={() => {

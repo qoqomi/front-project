@@ -58,10 +58,10 @@ export const loginFB = (username, password) => {
                 username: username,
                 password: password
             },
-            {
-                // headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` },
-                headers: { 'Authorization': ` ${localStorage.getItem("token")}` },
-            } // 누가 요청했는지 알려준다. (config에서 작동)
+            // {
+            //     // headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` },
+            //     headers: { 'Authorization': ` ${localStorage.getItem("token")}` },
+            // } // 누가 요청했는지 알려준다. (config에서 작동)
         ).then(function (response) {
             const token = response.data
             // console.log(token);
