@@ -37,7 +37,7 @@ const getPostFB = () => {
     let post_list = [];
 
     axios
-      .get("http://localhost:5001/times")
+      .get("/api/notice")
       .then(function (response) {
         // console.log("게시물조회", response.data);
         let postDB = response.data;
@@ -59,18 +59,18 @@ const addPostFB = (title, description, fileName, day) => {
   return function (dispatch, getState) {
     axios
       .post(
-        " http://localhost:5001/times",
+        "/api/notice/write",
         {
           title: title,
           description: description,
           image: fileName,
-          day: day,
+          day: day
+        },
+        {
+          headers: {
+            'Authorization': ` ${localStorage.getItem("token")}`
+          }
         }
-        // {
-        //   headers: {
-        //     Authorization: ` ${localStorage.getItem("token")}`,
-        //   },
-        // }
       )
       .then(function (res2) {
         console.log("addPostFB res !! ", res2);
@@ -117,17 +117,17 @@ const updateOnePostFB = (id, title, description, fileName) => {
   return function (dispatch, getState) {
     axios
       .patch(
-        "http://localhost:5001/times/" + id,
+        "/api/notice/change/" + id,
         {
           // 이미 back-server에서 ID 값을 만들어주기 때문에 따로 id값을 넣어주지 않는다.
 
           title: title,
           description: description,
-          image: fileName,
+          image: fileName
+        },
+        {
+          headers: { 'Authorization': ` ${localStorage.getItem("token")}` }
         }
-        // {
-        //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        // }
       )
       .then(function (res) {
         console.log("update res !! ", res.data);
@@ -151,13 +151,12 @@ const deleteOnePostFB = (id) => {
   return function (dispatch, getState) {
     axios
       .delete(
-        "http://localhost:5001/times/" + id
-
-        // {
-        // headers: {
-        //   Authorization: `Bearer ${localStorage.getItem("token")}`,
-        // },
-        // }
+        "/api/notice/del/" + id,
+        {
+          headers: {
+            'Authorization' : ` ${localStorage.getItem("token")}`
+          }
+        }
       )
       .then(function (response) {
         console.log("delete res !! ", id);
