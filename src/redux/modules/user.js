@@ -1,24 +1,20 @@
 import axios from "axios";
 import { createAction } from "redux-actions";
 
-// axios.defaults.baseURL = "http://15.165.160.84";
-// axios.defaults.withCredentials = true;
-
-// 06.15 최신
 // Actions
 const SET_USER = "SET_USER";
 const LOG_OUT = "LOG_OUT";
 
 const initialState = {
-    user: {
-        userID: '',
-    },
-    is_login: false,
-    msg: '',
+  user: {
+    userID: "",
+  },
+  is_login: false,
+  msg: "",
 };
 
 // Action Creators
-const setUser = createAction(SET_USER, (user) => ({ user }))
+const setUser = createAction(SET_USER, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 
 // export function loadWidgets() {
@@ -118,7 +114,6 @@ export const loginCheckFB = () => {
     }
 }
 
-
 // const signupDB = (id, pwd, nickname) => {
 //     let createdAt = new Date()
 //     let updatedAt = null
@@ -142,25 +137,24 @@ export const loginCheckFB = () => {
 //     }
 // }
 
-
 // Reducer
 export default function reducer(state = initialState, action = {}) {
-    switch (action.type) {
-        // case "post/LOAD": {
-        //     return { list: action.post_list }
-        // }
+  switch (action.type) {
+    // case "post/LOAD": {
+    //     return { list: action.post_list }
+    // }
 
-        // case "post/CREATE": {
-        //     const new_list = [...state.list];
-        //     return { list: new_list };
-        // }
+    // case "post/CREATE": {
+    //     const new_list = [...state.list];
+    //     return { list: new_list };
+    // }
 
-        default:
-            return state;
-    }
+    default:
+      return state;
+  }
 }
 
 export const actionCreators = {
-    loginFB,
-    loginCheckFB
+  loginFB,
+  loginCheckFB,
 };

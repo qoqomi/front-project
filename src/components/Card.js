@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { deletePost } from "../redux/modules/post";
 import {
@@ -9,12 +9,16 @@ import {
   faFilePen,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Card = (props) => {
-  const dispatch = useDispatch();
-  const { title, description, image, user_id } = props;
-  console.log(user_id);
-  const [images, setImages] = React.useState(image);
+import { useNavigate } from "react-router-dom";
+import { actionCreators as postActions } from "../redux/modules/post";
 
+const Card = ({ data }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // const { title, description, image, id, index } = props;
+
+  const [images, setImages] = React.useState(data.image);
+  // console.log(data.image);
   return (
     <>
       <Aarticle>
@@ -28,33 +32,26 @@ const Card = (props) => {
                 height: "180px",
                 objectFit: "cover",
               }}
-              src={image}
+              src={data.image}
             />
           )}
 
           <TopName>
-            <h4>{title}</h4>
+            <h4>{data.title}</h4>
             <Name>
               <span>
                 <FontAwesomeIcon
                   icon={faFilePen}
                   style={{ color: "#1e1e1e", fontSize: "15px" }}
+                  onClick={() => {
+                    navigate(`/notice/write/${data.id}`);
+                  }}
                 />
               </span>
-              <FontAwesomeIcon
-                icon={faDeleteLeft}
-                style={{
-                  color: "#1e1e1e",
-                  marginLeft: "10px",
-                  fontSize: "18px",
-                }}
-                onClick={() => {
-                  dispatch(deletePost(user_id));
-                }}
-              />
+              <p>{data.day}</p>
             </Name>
           </TopName>
-          {images ? <p>{description}</p> : <P>{description}</P>}
+          {images ? <p>{data.description}</p> : <P>{data.description}</P>}
         </Contents>
         <Name>
           <span>닉네임</span>
