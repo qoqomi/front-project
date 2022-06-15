@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createAction } from "redux-actions";
+import { createAction, handleActions } from "redux-actions";
 
 // Actions
 const SET_USER = "SET_USER";
@@ -15,12 +15,6 @@ const setUser = createAction(SET_USER, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 
-// export function loadWidgets() {
-//     return { type: LOAD };
-// }
-
-// middlewares
-// 회원가입
 const signupFB = (username, password, nickname, passwordCk) => {
   return function (dispatch, getState) {
     axios
@@ -43,8 +37,8 @@ const signupFB = (username, password, nickname, passwordCk) => {
 };
 
 // 로그인
-export const loginFB = (username, password) => {
-  console.log(username, password);
+export const loginFB = (id, username, password) => {
+  console.log(id, username, password);
   // return function (dispatch, getState, { history }) {
   return function (dispatch) {
     // axios는 axios.요청타입으로 요청을 보낼 수 있다. 이 방식을 별칭 메서드라고 부른다.
@@ -136,24 +130,25 @@ export const loginCheckFB = () => {
 // }
 
 // Reducer
-export default function reducer(state = initialState, action = {}) {
-  switch (action.type) {
-    // case "post/LOAD": {
-    //     return { list: action.post_list }
-    // }
+// export default function reducer(state = initialState, action = {}) {
+//   switch (action.type) {
+//     case "post/LOAD": {
+//         return { list: action.post_list }
+//     }
 
-    // case "post/CREATE": {
-    //     const new_list = [...state.list];
-    //     return { list: new_list };
-    // }
+//     case "post/CREATE": {
+//         const new_list = [...state.list];
+//         return { list: new_list };
+//     }
 
-    default:
-      return state;
-  }
-}
+//     default:
+//       return state;
+//   }
+// }
 
-export const actionCreators = {
+const actionCreators = {
   loginFB,
   loginCheckFB,
   signupFB,
 };
+export { actionCreators };

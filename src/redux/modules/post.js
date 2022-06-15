@@ -17,12 +17,12 @@ export function addPost(post_create) {
 }
 
 export function modifyPost(post_modify) {
-  console.log("수정 시작💡", post_modify);
+  // console.log("수정 시작💡", post_modify);
   return { type: MODIFY, post_modify };
 }
 
 export function deletePost(post_delete) {
-  console.log("삭제시작💡", post_delete);
+  // console.log("삭제시작💡", post_delete);
   return { type: DELETE, post_delete };
 }
 // export function deletePost(post_delete) {
@@ -37,7 +37,7 @@ const getPostFB = () => {
     let post_list = [];
 
     axios
-      .get("http://localhost:5001/times")
+      .get("/api/notice")
       .then(function (response) {
         // console.log("게시물조회", response.data);
         let postDB = response.data;
@@ -59,7 +59,7 @@ const addPostFB = (title, description, fileName, day) => {
   return function (dispatch, getState) {
     axios
       .post(
-        " http://localhost:5001/times",
+        " /api/notice/write",
         {
           title: title,
           description: description,
@@ -117,7 +117,7 @@ const updateOnePostFB = (id, title, description, fileName) => {
   return function (dispatch, getState) {
     axios
       .patch(
-        "http://localhost:5001/times/" + id,
+        "/api/notice/change/" + id,
         {
           // 이미 back-server에서 ID 값을 만들어주기 때문에 따로 id값을 넣어주지 않는다.
 
@@ -151,7 +151,7 @@ const deleteOnePostFB = (id) => {
   return function (dispatch, getState) {
     axios
       .delete(
-        "http://localhost:5001/times/" + id
+        "/api/notice/del/" + id
 
         // {
         // headers: {

@@ -1,12 +1,12 @@
 import axios from "axios";
 
-// const api = axios.create({
-//   baseURL: "http://localhost:5001/times",
-//   headers: {
-//     "content-type": "application/json;charset=UTF-8",
-//     accept: "application/json,",
-//   },
-// });
+const api = axios.create({
+  baseURL: "http://localhost:5001/times",
+  headers: {
+    "content-type": "application/json;charset=UTF-8",
+    accept: "application/json,",
+  },
+});
 
 //토큰
 // api.interceptors.request.use(function (config) {

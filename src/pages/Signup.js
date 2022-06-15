@@ -11,12 +11,8 @@ import { actionCreators as userActions } from "../redux/modules/user";
 
 const Signup = () => {
   const dispatch = useDispatch();
-  // const is_token = localStorage.getItem("token") ? true : false;
 
-  const [username, setId] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [passwordCk, setPasswordCk] = React.useState("");
-  const [nickname, setNickname] = React.useState("");
+  // const is_token = localStorage.getItem("token") ? true : false;
 
   // const passwordCheck = (password) => {
   //   let _reg2 = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
@@ -24,6 +20,19 @@ const Signup = () => {
 
   //   return _reg2.test(password);
   // }
+
+  const navigate = useNavigate();
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [passwordCk, setPasswordCk] = React.useState("");
+  const [nickname, setNickname] = React.useState("");
+
+  // const passwordCheck = (password) => {
+  //   // let _reg2 = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
+  //   var _reg2 = /[0-9]/g;
+
+  //   return _reg2.test(password);
+  // };
 
   // function passwordCheck(password) {
   //   if (!/^[a-zA-Z0-9]{6,20}$/.test(password)) {
@@ -40,12 +49,15 @@ const Signup = () => {
 
   const signUpForm = () => {
     console.log("보낸다");
-    dispatch(userActions.signupFB(username, password, nickname, passwordCk));
+
+    dispatch(createAction.signupFB(username, password, nickname, passwordCk));
   };
 
   // React.useEffect(() => {
   //   if (is_token) {
-  //     dispatch();
+
+  //     dispatch(userActions.loginCheckFB());
+
   //   }
   // }, []);
 
@@ -59,6 +71,8 @@ const Signup = () => {
           placeholder="아이디"
           onChange={(e) => {
             setId(e.target.value);
+
+            setUsername(e.target.value);
           }}
         />
         <Input
@@ -67,6 +81,8 @@ const Signup = () => {
           placeholder="비밀번호(6자리 이상)"
           onChange={(e) => {
             setPassword(e.target.value);
+
+            console.log(password);
           }}
         />
         <Input
@@ -85,6 +101,7 @@ const Signup = () => {
             setNickname(e.target.value);
           }}
         />
+
         <Button type="submit" onClick={signUpForm()}>
           회원가입 하기
         </Button>
