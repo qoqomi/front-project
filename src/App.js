@@ -20,6 +20,8 @@ function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // const is_token = localStorage.getItem("token") ? true : false;
+
   //실제로 연결되어있는 데이터
   React.useEffect(() => {
     something();
@@ -27,9 +29,10 @@ function App() {
   }, []);
   //실제 연결되는 서버
   React.useEffect(() => {
-    // something();
-    loginCheckFB();
-    loginFB();
+
+    // if (is_token){
+    //   dispatch(userActions.loginCheckFB());
+    // }
   }, []);
   // const something = () => {
   //   axios

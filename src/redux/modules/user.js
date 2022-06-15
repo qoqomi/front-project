@@ -24,8 +24,8 @@ const logOut = createAction(LOG_OUT, (user) => ({ user }));
 // middlewares
 // 회원가입
 export const signupDB = (username, password) => {
-    // return async function (dispatch, getState) {
-    return async function () {
+    return async function (dispatch, getState) {
+    // return async function () {
         await axios.post("http://15.165.160.84/api/user/login",
             {
                 username: username,
@@ -48,16 +48,11 @@ export const signupDB = (username, password) => {
 
 // 로그인
 export const loginFB = (username, password) => {
-    console.log(username, password)
+    // console.log(username, password)
     // return function (dispatch, getState, { history }) {
     return function (dispatch) {
-
-        // axios는 axios.요청타입으로 요청을 보낼 수 있다. 이 방식을 별칭 메서드라고 부른다.
-        // 예시)
-        // axios.get(url, config)
         // axios.post(url, data, config)
-
-        // 어떤 요청을 보낼지, 별칭 메서드 사용
+        // 토큰 값 받아오기
         axios.post('/api/user/login',
             {
                 username: username,
@@ -69,12 +64,10 @@ export const loginFB = (username, password) => {
             } // 누가 요청했는지 알려준다. (config에서 작동)
         ).then(function (response) {
             const token = response.data
-            console.log(token);
+            // console.log(token);
             localStorage.setItem("token", token)
             window.alert(`{localStorage.getItem("key")}님 환영합니다`);
-
             // history.push('/');
-
         })
         .catch(function (error) {
             window.alert('아이디 혹은 비밀번호가 일치하지 않습니다.');
@@ -87,17 +80,18 @@ export const loginFB = (username, password) => {
 export const loginCheckFB = () => {
     // return function (dispatch, getState, { history }) {
     return function (dispatch) {
-        // axios.get('/api/user/me',
-        axios.get('/api/user/auth',
+        axios.get('/api/user/info',
             {
-                // headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` },
-                headers: { 'Authorization': ` ${localStorage.getItem("token")}` },
+                headers: { 'Authorization': ` ${localStorage.getItem("token")}` }
             }
         )
         .then(function (response) {
-            console.log("logincheckFB !! ", response);
+            // console.log("logincheckFB !! ", response);
+            console.log(response);
             // if (response.data.user) {
             if (response.data) {
+                console.log(response);
+                console.log(response.data);
                 dispatch(setUser({
                     // username: username,
                     // password: password,
