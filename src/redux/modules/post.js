@@ -17,12 +17,12 @@ export function addPost(post_create) {
 }
 
 export function modifyPost(post_modify) {
-  console.log("수정 시작💡", post_modify);
+  // console.log("수정 시작💡", post_modify);
   return { type: MODIFY, post_modify };
 }
 
 export function deletePost(post_delete) {
-  console.log("삭제시작💡", post_delete);
+  // console.log("삭제시작💡", post_delete);
   return { type: DELETE, post_delete };
 }
 // export function deletePost(post_delete) {

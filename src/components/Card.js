@@ -64,7 +64,7 @@ const Card = ({ data }) => {
           {images ? <p>{data.description}</p> : <P>{data.description}</P>}
         </Contents>
         <Name>
-          <span>닉네임</span>
+          <span>{data.username}</span>
           <ButtomBar>
             <span style={{ marginRight: "10px" }}>{data.day}</span>
             <FontAwesomeIcon
