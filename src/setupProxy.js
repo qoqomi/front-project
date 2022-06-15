@@ -8,4 +8,11 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    // createProxyMiddleware("/restaurant", {
+    createProxyMiddleware("/api/notice/write", {
+      target: "http://15.165.160.84", //접속하려는 서버의 루트 URL
+      changeOrigin: true,
+    })
+  );
 };

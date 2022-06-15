@@ -101,12 +101,11 @@ export const loginCheckFB = () => {
                 dispatch(logOut());
             }
         })
-
-        .catch(function (error) {
-            console.log('logincheckFB error !!', error);
-        });
-    }
-}
+      .catch(function (error) {
+        console.log("logincheckFB error !!", error);
+      });
+  };
+};
 
 // const signupDB = (id, pwd, nickname) => {
 //     let createdAt = new Date()

@@ -21,6 +21,10 @@ export function modifyPost(post_modify) {
   return { type: MODIFY, post_modify };
 }
 
+export function deletePost(post_delete) {
+  console.log("삭제시작💡", post_delete);
+  return { type: DELETE, post_delete };
+}
 // export function deletePost(post_delete) {
 //   return { type: DELETE, post_delete };
 // }
@@ -64,7 +68,7 @@ const addPostFB = (title, description, fileName, day) => {
         }
         // {
         //   headers: {
-        //     Authorization: `Bearer ${localStorage.getItem("token")}`,
+        //     Authorization: ` ${localStorage.getItem("token")}`,
         //   },
         // }
       )
@@ -79,7 +83,7 @@ const addPostFB = (title, description, fileName, day) => {
           day: res2.data.day,
         };
 
-        console.log("리듀서에 보낼 post !! ", post);
+        // console.log("리듀서에 보낼 post !! ", post);
 
         dispatch(addPost(post));
       })
@@ -116,6 +120,7 @@ const updateOnePostFB = (id, title, description, fileName) => {
         "http://localhost:5001/times/" + id,
         {
           // 이미 back-server에서 ID 값을 만들어주기 때문에 따로 id값을 넣어주지 않는다.
+
           title: title,
           description: description,
           image: fileName,
@@ -128,7 +133,7 @@ const updateOnePostFB = (id, title, description, fileName) => {
         console.log("update res !! ", res.data);
         // Reducer에는 Id값을 넣어줌으로써 reducer에서 카드의 고유 Id값을 넣어 리듀서에서 클릭한 카드의 아이디와 전체의 아이디를 비교할 수 있다.
         const post = {
-          id: id,
+          id: res.data.id,
           title: res.data.title,
           description: res.data.description,
           image: res.data.image,
@@ -142,6 +147,48 @@ const updateOnePostFB = (id, title, description, fileName) => {
   };
 };
 
+const deleteOnePostFB = (id) => {
+  return function (dispatch, getState) {
+    axios
+      .delete(
+        "http://localhost:5001/times/" + id
+
+        // {
+        // headers: {
+        //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+        // },
+        // }
+      )
+      .then(function (response) {
+        console.log("delete res !! ", id);
+
+        dispatch(deletePost(id));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+};
+// const deleteOnePostFB = (id) => {
+//   return function (dispatch, getState) {
+//     // const token = localStorage.getItem("token");
+//     // console.log(token);
+//     axios
+//       .delete(
+//         "http://localhost:5001/times/" + id
+//         // {
+//         // headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+//         // }
+//       )
+//       .then(function (response) {
+//         dispatch(deletePost(response.data));
+//         console.log(response);
+//       })
+//       .catch(function (err) {
+//         alert(err.response.data.errorMessage);
+//       });
+//   };
+// };
 const initialState = {
   list: [
     // {
@@ -168,12 +215,23 @@ export default function reducer(state = initialState, action = {}) {
       //전체 카드 데이터를 가져다 map을 돌려 선택한 카드의 아이디와 전체의 아이디값을 비교해 같다면 값을 리턴한다.
 
       const new_post = state.list.map((le, index) => {
+        console.log(parseInt(action.post_modify.id));
         if (parseInt(action.post_modify.id) === le.id) {
           return { ...le, ...action.post_modify };
         } else {
           return le;
         }
       });
+      return { list: new_post };
+    }
+    case "post/DELETE": {
+      console.log("들어옴");
+      const new_post = state.list.filter((l, idx) => {
+        console.log(action.post_delete);
+        // 조건에 맞는 애 빼고 list 에 담아주는 것
+        return action.post_delete != l.id;
+      });
+
       return { list: new_post };
     }
     default:
@@ -187,6 +245,7 @@ const actionCreators = {
   addPost,
   addPostFB,
   updateOnePostFB,
+  deleteOnePostFB,
 };
 
 export { actionCreators };
