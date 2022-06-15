@@ -4,18 +4,16 @@ import { createAction } from "redux-actions";
 // Actions
 const SET_USER = "SET_USER";
 const LOG_OUT = "LOG_OUT";
+const GET_USER = "GET_USER";
 
 const initialState = {
-  user: {
-    userID: "",
-  },
-  is_login: false,
-  msg: "",
+  user: [],
 };
 
 // Action Creators
 const setUser = createAction(SET_USER, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
+const getUser = createAction(GET_USER, (user) => ({ user }));
 
 // export function loadWidgets() {
 //     return { type: LOAD };
@@ -23,24 +21,23 @@ const logOut = createAction(LOG_OUT, (user) => ({ user }));
 
 // middlewares
 // 회원가입
-export const signupDB = (username, password) => {
-  // return async function (dispatch, getState) {
-  return async function () {
-    await axios
-      .post("http://15.165.160.84/api/user/login", {
+const signupFB = (username, password, nickname, passwordCk) => {
+  return function (dispatch, getState) {
+    axios
+      .post("/api/user/signup/", {
         username: username,
         password: password,
+        nickname: nickname,
+        passwordCk: passwordCk,
       })
-      .then((user) => {
-        console.log(user);
-        window.alert("회원가입이 완료되었습니다.");
-        window.location.assign("/login");
+      .then(function (response) {
+        console.log(response);
+
+        const message = response.data.message;
+        window.alert(message);
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        window.alert("회원가입을 다시 시도해주세요");
-        console.log(errorCode, errorMessage);
+      .catch(function (error) {
+        console.log(error);
       });
   };
 };
@@ -158,4 +155,5 @@ export default function reducer(state = initialState, action = {}) {
 export const actionCreators = {
   loginFB,
   loginCheckFB,
+  signupFB,
 };
