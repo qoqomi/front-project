@@ -4,8 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { loginFB } from "../redux/modules/user";
-import { loginCheckFB } from '../redux/modules/user';
+import { loginFB, loginCheckFB } from "../redux/modules/user";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -47,6 +46,13 @@ const Login = () => {
       <Input type="password" placeholder="비밀번호(6자리 이상)" onChange={
         (e) => setPassword(e.target.value)
       } />
+      {/* <Button
+        onClick={() => {
+          login();
+          loginCheckFB();
+          navigate("../");
+        }}
+      > */}
       <Button
         onClick={() => {
           login();

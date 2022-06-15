@@ -4,7 +4,6 @@ import logo from "../images/coc_logo.png";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginCheckFB } from '../redux/modules/user';
 
 const Nav = () => {
   const navigate = useNavigate();
