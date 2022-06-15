@@ -4,6 +4,7 @@ import { createAction } from "redux-actions";
 // axios.defaults.baseURL = "http://15.165.160.84";
 // axios.defaults.withCredentials = true;
 
+// 06.15 최신
 // Actions
 const SET_USER = "SET_USER";
 const LOG_OUT = "LOG_OUT";
