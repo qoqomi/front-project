@@ -21,7 +21,10 @@ const Nav = () => {
       />
       {localStorage.token ? (
         <User>
-          <Button onClick={handlelouOut}>로그아웃</Button>
+          <Button onClick={() => {
+            handlelouOut();
+            navigate('/');
+          }}>로그아웃</Button>
           <ButtonWrite
             onClick={() => {
               navigate("/notice/write");
