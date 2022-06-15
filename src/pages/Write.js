@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { addPost, addPostFB, actionCreators } from "../redux/modules/post";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { useSelector } from "react-redux";
+
 const Write = () => {
   const post = useSelector((state) => state.post.list);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { id } = useParams();
-  console.log(id);
+
   const is_edit = id ? true : false;
   //추후 검사
   // const _post = is_edit ? post.find((p) => p.id === id) : null;
@@ -19,6 +20,10 @@ const Write = () => {
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [fileName, setFileName] = React.useState("");
+
+  useEffect(() => {
+    console.log(fileName);
+  }, [fileName]);
 
   const onChange = (e) => {
     const { value, name } = e.target;

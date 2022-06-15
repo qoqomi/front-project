@@ -78,6 +78,7 @@ function App() {
         <Route path="/api/user/login" exact element={<Login />}></Route>
         <Route path="/api/user/signup" exact element={<Signup />}></Route>
         <Route path="/notice/write/:id" exact element={<Write />}></Route>
+        <Route path="/notice/write" exact element={<Write />}></Route>
       </Routes>
     </div>
   );

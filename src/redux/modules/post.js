@@ -62,7 +62,7 @@ const addPostFB = (title, description, fileName) => {
           id: res2.data.id,
           title: res2.data.title,
           description: res2.data.description,
-          image: res2.data.image,
+          image: res2.data.fileName,
         };
 
         console.log("리듀서에 보낼 post !! ", post);
@@ -94,7 +94,7 @@ const updateOnePostFB = (id, title, description, fileName) => {
           id: id,
           title: res.data.title,
           description: res.data.description,
-          image: res.data.image,
+          image: res.data.fileName,
         };
         // 리듀서에 새로운 데이터로 넣어줘라.
         dispatch(modifyPost(post));
