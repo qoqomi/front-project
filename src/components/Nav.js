@@ -7,6 +7,10 @@ import { useNavigate } from "react-router-dom";
 const Nav = () => {
   const navigate = useNavigate();
 
+  const handlelouOut = () => {
+    localStorage.removeItem("token");
+  }
+
   return (
     <Navbar>
       <Logo
@@ -15,25 +19,28 @@ const Nav = () => {
           navigate("./");
         }}
       />
-      <User>
-        <Button>로그아웃</Button>
-        <ButtonWrite
-          onClick={() => {
-            navigate("/notice/write");
-          }}
-        >
-          새 글 작성
-        </ButtonWrite>
-      </User>
-      <User>
-        <Button
-          onClick={() => {
-            navigate("/api/user/login");
-          }}
-        >
-          로그인
-        </Button>
-      </User>
+      {localStorage.token ? (
+        <User>
+          <Button onClick={handlelouOut}>로그아웃</Button>
+          <ButtonWrite
+            onClick={() => {
+              navigate("/notice/write");
+            }}
+          >
+            새 글 작성
+          </ButtonWrite>
+        </User>
+      ) : (
+        <User>
+          <Button
+            onClick={() => {
+              navigate("/api/user/login");
+            }}
+          >
+            로그인
+          </Button>
+        </User>
+      )}
     </Navbar>
   );
 };

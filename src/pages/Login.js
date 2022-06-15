@@ -19,6 +19,24 @@ const Login = () => {
     ))
   }
 
+  // initializeUserInfo = async () => {
+  //   const loggedInfo = storage.get('loggedInfo');
+  //   if(!loggedInfo) return;
+
+  // const { UserActions } = this.props;
+  // UserActions.setLoggedInfo(loggedInfo);
+  // try {
+  // await UserActions.checkStatus();
+  // } catch (e) {
+  //     storage.remove('loggedInfo');
+  //     window.location.href = '/auth/login?expired';
+  // }
+  // }
+
+  // componentDidMount() {
+  //   this.initializeUserInfo();
+  // }
+
   return (
     <Wrap>
       <H4>로그인</H4>

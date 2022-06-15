@@ -71,10 +71,10 @@ export const loginFB = (username, password) => {
                 headers: { 'Authorization': ` ${localStorage.getItem("token")}` },
             } // 누가 요청했는지 알려준다. (config에서 작동)
         ).then(function (response) {
-            console.log(response);
-
-            const token = response.data.token
+            const token = response.data
+            console.log(token);
             localStorage.setItem("token", token)
+            window.alert(`{localStorage.getItem("key")}님 환영합니다`);
 
             // history.push('/');
 
@@ -83,7 +83,6 @@ export const loginFB = (username, password) => {
             window.alert('아이디 혹은 비밀번호가 일치하지 않습니다.');
             console.log(error);
         });
-
     }
 }
 
@@ -100,12 +99,12 @@ export const loginCheckFB = () => {
         )
         .then(function (response) {
             console.log("logincheckFB !! ", response);
-            if (response.data.user) {
+            // if (response.data.user) {
+            if (response.data) {
                 dispatch(setUser({
-                    userID: response.data.user.userID,
-                    id: response.data.user.id,
-                    // nickname: response.data.user.nickname,
-                    token: localStorage.getItem("token"),
+                    // username: username,
+                    // password: password,
+                    token: localStorage.getItem("token")
                 }));
             } else {
                 dispatch(logOut());
