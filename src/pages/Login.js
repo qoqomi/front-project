@@ -2,18 +2,54 @@ import React from "react";
 import styled from "styled-components";
 
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { loginFB } from "../redux/modules/user";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [id, setId] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const login = () => {
+    dispatch(loginFB(
+      id, password
+    ))
+  }
+
+  // initializeUserInfo = async () => {
+  //   const loggedInfo = storage.get('loggedInfo');
+  //   if(!loggedInfo) return;
+
+  // const { UserActions } = this.props;
+  // UserActions.setLoggedInfo(loggedInfo);
+  // try {
+  // await UserActions.checkStatus();
+  // } catch (e) {
+  //     storage.remove('loggedInfo');
+  //     window.location.href = '/auth/login?expired';
+  // }
+  // }
+
+  // componentDidMount() {
+  //   this.initializeUserInfo();
+  // }
 
   return (
     <Wrap>
       <H4>로그인</H4>
-      <Input type="text" placeholder="아이디" />
-      <Input type="password" placeholder="비밀번호(6자리 이상)" />
+      <Input type="text" placeholder="아이디" onChange={
+        (e) => setId(e.target.value)
+      } />
+      <Input type="password" placeholder="비밀번호(6자리 이상)" onChange={
+        (e) => setPassword(e.target.value)
+      } />
       <Button
         onClick={() => {
           navigate("../");
+          login();
         }}
       >
         로그인 하기
