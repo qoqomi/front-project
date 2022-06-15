@@ -1,13 +1,12 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5001/times",
+  // baseURL: "http://15.165.160.84/api/user/login",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,",
   },
 });
-
 //토큰
 // api.interceptors.request.use(function (config) {
 //   const accessToken = document.cookie.split("=")[1];

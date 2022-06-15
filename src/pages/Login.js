@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { loginFB } from "../redux/modules/user";
+import { loginCheckFB } from '../redux/modules/user';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -52,8 +53,9 @@ const Login = () => {
       />
       <Button
         onClick={() => {
-          navigate("../");
           login();
+          loginCheckFB();
+          navigate("../");
         }}
       >
         로그인 하기

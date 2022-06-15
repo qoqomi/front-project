@@ -59,18 +59,18 @@ const addPostFB = (title, description, fileName, day) => {
   return function (dispatch, getState) {
     axios
       .post(
-        " /api/notice/write",
+        "/api/notice/write",
         {
           title: title,
           description: description,
           image: fileName,
-          day: day,
+          day: day
+        },
+        {
+          headers: {
+            'Authorization': ` ${localStorage.getItem("token")}`
+          }
         }
-        // {
-        //   headers: {
-        //     Authorization: ` ${localStorage.getItem("token")}`,
-        //   },
-        // }
       )
       .then(function (res2) {
         console.log("addPostFB res !! ", res2);
@@ -123,11 +123,11 @@ const updateOnePostFB = (id, title, description, fileName) => {
 
           title: title,
           description: description,
-          image: fileName,
+          image: fileName
+        },
+        {
+          headers: { 'Authorization': ` ${localStorage.getItem("token")}` }
         }
-        // {
-        //   headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        // }
       )
       .then(function (res) {
         console.log("update res !! ", res.data);
@@ -151,13 +151,12 @@ const deleteOnePostFB = (id) => {
   return function (dispatch, getState) {
     axios
       .delete(
-        "/api/notice/del/" + id
-
-        // {
-        // headers: {
-        //   Authorization: `Bearer ${localStorage.getItem("token")}`,
-        // },
-        // }
+        "/api/notice/del/" + id,
+        {
+          headers: {
+            'Authorization' : ` ${localStorage.getItem("token")}`
+          }
+        }
       )
       .then(function (response) {
         console.log("delete res !! ", id);

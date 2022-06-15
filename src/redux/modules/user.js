@@ -15,91 +15,93 @@ const setUser = createAction(SET_USER, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const getUser = createAction(GET_USER, (user) => ({ user }));
 
-const signupFB = (username, password, nickname, passwordCk) => {
-  return function (dispatch, getState) {
-    axios
-      .post("/api/user/signup/", {
-        username: username,
-        password: password,
-        nickname: nickname,
-        passwordCk: passwordCk,
-      })
-      .then(function (response) {
-        console.log(response);
+// export function loadWidgets() {
+//     return { type: LOAD };
+// }
 
-        const message = response.data.message;
-        window.alert(message);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-};
+// middlewares
+// 회원가입
+export const signupDB = (username, password) => {
+    return async function (dispatch, getState) {
+    // return async function () {
+        await axios.post("http://15.165.160.84/api/user/login",
+            {
+                username: username,
+                password: password
+            }
+        )
+            .then((user) => {
+                console.log(user)
+                window.alert("회원가입이 완료되었습니다.")
+                window.location.assign("/login")
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                window.alert("회원가입을 다시 시도해주세요")
+                console.log(errorCode, errorMessage)
+            })
+    }
+}
 
 // 로그인
-export const loginFB = (id, username, password) => {
-  console.log(id, username, password);
-  // return function (dispatch, getState, { history }) {
-  return function (dispatch) {
-    // axios는 axios.요청타입으로 요청을 보낼 수 있다. 이 방식을 별칭 메서드라고 부른다.
-    // 예시)
-    // axios.get(url, config)
-    // axios.post(url, data, config)
+export const loginFB = (username, password) => {
+    // console.log(username, password)
+    // return function (dispatch, getState, { history }) {
+    return function (dispatch) {
+        // axios.post(url, data, config)
+        // 토큰 값 받아오기
+        axios.post('/api/user/login',
+            {
+                username: username,
+                password: password
+            },
+            // {
+            //     // headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` },
+            //     headers: { 'Authorization': ` ${localStorage.getItem("token")}` },
+            // } // 누가 요청했는지 알려준다. (config에서 작동)
+        ).then(function (response) {
+            const token = response.data
+            // console.log(token);
+            localStorage.setItem("token", token)
+            window.alert(`{localStorage.getItem("key")}님 환영합니다`);
+            // history.push('/');
+        })
+        .catch(function (error) {
+            window.alert('아이디 혹은 비밀번호가 일치하지 않습니다.');
+            console.log(error);
+        });
+    }
+}
 
-    // 어떤 요청을 보낼지, 별칭 메서드 사용
-    axios
-      .post(
-        "/api/user/login",
-        {
-          username: username,
-          password: password,
-        },
-        {
-          // headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` },
-          headers: { Authorization: ` ${localStorage.getItem("token")}` },
-        } // 누가 요청했는지 알려준다. (config에서 작동)
-      )
-      .then(function (response) {
-        const token = response.data;
-        console.log(token);
-        localStorage.setItem("token", token);
-        window.alert(`{localStorage.getItem("key")}님 환영합니다`);
-
-        // history.push('/');
-      })
-      .catch(function (error) {
-        window.alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
-        console.log(error);
-      });
-  };
-};
-
-// 로그인 된 상태인지 확인
-export const loginCheckFB = () => {
-  // return function (dispatch, getState, { history }) {
-  return function (dispatch) {
-    // axios.get('/api/user/me',
-    axios
-      .get("/api/user/auth", {
-        // headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` },
-        headers: { Authorization: ` ${localStorage.getItem("token")}` },
-      })
-      .then(function (response) {
-        console.log("logincheckFB !! ", response);
-        // if (response.data.user) {
-        if (response.data) {
-          dispatch(
-            setUser({
-              // username: username,
-              // password: password,
-              token: localStorage.getItem("token"),
-            })
-          );
-        } else {
-          dispatch(logOut());
-        }
-      })
-
+// 토큰 해독
+export const loginCheckFB = (username) => {
+    // return function (dispatch, getState, { history }) {
+    return function (dispatch) {
+        axios.get('/api/user/info',
+            {
+                headers: { 'Authorization': ` ${localStorage.getItem("token")}` }
+            },
+        )
+        .then(function (response) {
+            const username = response.data
+            console.log(username);
+            localStorage.setItem("username", username)
+            console.log("logincheckFB !! ", response);
+            // console.log(response);
+            // if (response.data.user) {
+            if (response.data) {
+                console.log(response);
+                console.log(response.data);
+                dispatch(setUser({
+                    // username: username,
+                    // password: password,
+                    token: localStorage.getItem("token")
+                }));
+            } else {
+                dispatch(logOut());
+            }
+        })
       .catch(function (error) {
         console.log("logincheckFB error !!", error);
       });
@@ -149,6 +151,4 @@ export const loginCheckFB = () => {
 const actionCreators = {
   loginFB,
   loginCheckFB,
-  signupFB,
 };
-export { actionCreators };
