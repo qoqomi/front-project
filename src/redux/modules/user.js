@@ -46,7 +46,6 @@ export const signupDB = (username, password, passwordCk, nickname) => {
   };
 };
 
-//
 // 로그인 합치기전
 export const loginFB = (username, password) => {
   return async function (dispatch, getState, { history }) {
