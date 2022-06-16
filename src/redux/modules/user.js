@@ -102,33 +102,59 @@ export const loginFB = (username, password) => {
 
 // 토큰 해독
 export const loginCheckFB = () => {
+    // return function (dispatch, getState, { history }) {
+    return function (dispatch) {
+        axios.get('/api/user/info',
+            {
+                headers: { 'Authorization': ` ${localStorage.getItem("token")}` }
+            }
+        )
+        .then(function (response) {
+            const username = response.data
+            console.log(username);
+            localStorage.setItem("username", username)
+            console.log("logincheckFB !! ", response);
+            // console.log(response);
+            // if (response.data.user) {
+            if (response.data) {
+                console.log(response);
+                console.log(response.data);
+                dispatch(setUser({
+                    // username: username,
+                    // password: password,
+                    token: localStorage.getItem("token")
+                }));
+            } else {
+                dispatch(logOut());
+            }
+        })
   // return function (dispatch, getState, { history }) {
-  return function (dispatch) {
-    axios
-      .get("/api/user/info", {
-        headers: { Authorization: ` ${localStorage.getItem("token")}` },
-      })
-      .then(function (response) {
-        const username = response.data;
-        console.log(username);
-        localStorage.setItem("username", username);
-        console.log("logincheckFB !! ", response);
-        // console.log(response);
-        // if (response.data.user) {
-        if (response.data) {
-          console.log(response);
-          console.log(response.data);
-          dispatch(
-            setUser({
-              // username: username,
-              // password: password,
-              token: localStorage.getItem("token"),
-            })
-          );
-        } else {
-          dispatch(logOut());
-        }
-      })
+//   return function (dispatch) {
+//     axios
+//       .get("/api/user/info", {
+//         headers: { Authorization: ` ${localStorage.getItem("token")}` },
+//       })
+//       .then(function (response) {
+//         const username = response.data;
+//         console.log(username);
+//         localStorage.setItem("username", username);
+//         console.log("logincheckFB !! ", response);
+//         // console.log(response);
+//         // if (response.data.user) {
+//         if (response.data) {
+//           console.log(response);
+//           console.log(response.data);
+//           dispatch(
+//             setUser({
+//               // username: username,
+//               // password: password,
+//               token: localStorage.getItem("token"),
+//             })
+//           );
+//         } else {
+//           dispatch(logOut());
+//         }
+//       })
       .catch(function (error) {
         console.log("logincheckFB error !!", error);
       });
