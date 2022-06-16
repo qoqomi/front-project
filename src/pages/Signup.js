@@ -46,7 +46,6 @@ const Signup = () => {
       alert("빈칸을 입력해주세요");
     } else {
       dispatch(signupDB(username, password, passwordCk, nickname));
-      history.push("/user/login");
     }
   };
 
