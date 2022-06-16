@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { loginCheckFB, loginFB } from "../redux/modules/user";
 import { actionCreators as userActions } from "../redux/modules/user";
 const Login = () => {
-  const navigate = useNavigate();
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const [id, setId] = React.useState("");
@@ -16,7 +16,7 @@ const Login = () => {
   const loginDB = () => {
     console.log("들어옴");
     dispatch(loginFB(id, password));
-    navigate("/");
+    history.push("/");
     // dispatch(loginFB(id, password)).then((response) => {
     //   console.log(response);
     //   // loginCheckFB();
@@ -68,7 +68,7 @@ const Login = () => {
       <P>회원이 아니시라면?</P>
       <Button
         onClick={() => {
-          navigate("/user/signup");
+          history.push("/user/signup");
         }}
       >
         회원가입 하기
