@@ -49,7 +49,7 @@ export const signupDB = (username, password, passwordCk, nickname) => {
 //
 // 로그인 합치기전
 export const loginFB = (username, password) => {
-  return async function (dispatch, getState) {
+  return async function (dispatch, getState, { history }) {
     await axios
       .post("/api/user/login", {
         username: username,
@@ -75,8 +75,7 @@ export const loginFB = (username, password) => {
           .catch(function (error) {
             console.log("logincheckFB error !!", error);
           });
-        history.push("/user/login");
-        //실험
+        history.push("/");
       })
       .catch(function (error) {
         console.log(error);
