@@ -75,6 +75,7 @@ export const loginFB = (username, password) => {
             console.log("logincheckFB error !!", error);
           });
         history.push("/user/login");
+        //실험
       })
       .catch(function (error) {
         console.log(error);
