@@ -24,9 +24,10 @@ const getUser = createAction(GET_USER, (user) => ({ user }));
 export const signupDB = (username, password, nickname) => {
   return function (dispatch, getState) {
     axios
-      .post("http://15.165.160.84/api/user/login", {
+      .post("http://15.165.160.84/api/user/signup", {
         username: username,
         password: password,
+        nickname: nickname
       })
 
       .then(function (response) {
@@ -44,37 +45,37 @@ export const signupDB = (username, password, nickname) => {
 };
 
 // 로그인
-// export const loginFB = (username, password) => {
-//   // console.log(username, password)
-//   // return function (dispatch, getState, { history }) {
-//   return function (dispatch) {
-//     // axios.post(url, data, config)
-//     // 토큰 값 받아오기
-//     axios
-//       .post(
-//         "/api/user/login",
-//         {
-//           username: username,
-//           password: password,
-//         }
-//         // {
-//         //     // headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` },
-//         //     headers: { 'Authorization': ` ${localStorage.getItem("token")}` },
-//         // } // 누가 요청했는지 알려준다. (config에서 작동)
-//       )
-//       .then(function (response) {
-//         const token = response.data;
-//         // console.log(token);
-//         localStorage.setItem("token", token);
-//         window.alert(`{localStorage.getItem("key")}님 환영합니다`);
-//         // history.push('/');
-//       })
-//       .catch(function (error) {
-//         window.alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
-//         console.log(error);
-//       });
-//   };
-// };
+export const loginFB = (username, password) => {
+  // console.log(username, password)
+  // return function (dispatch, getState, { history }) {
+  return function (dispatch) {
+    // axios.post(url, data, config)
+    // 토큰 값 받아오기
+    axios
+      .post(
+        "/api/user/login",
+        {
+          username: username,
+          password: password,
+        }
+        // {
+        //     // headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` },
+        //     headers: { 'Authorization': ` ${localStorage.getItem("token")}` },
+        // } // 누가 요청했는지 알려준다. (config에서 작동)
+      )
+      .then(function (response) {
+        const token = response.data;
+        // console.log(token);
+        localStorage.setItem("token", token);
+        window.alert(`{localStorage.getItem("key")}님 환영합니다`);
+        // history.push('/');
+      })
+      .catch(function (error) {
+        window.alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
+        console.log(error);
+      });
+  };
+};
 
 // 토큰 해독
 // export const loginCheckFB = () => {

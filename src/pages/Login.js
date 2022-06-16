@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { loginCheckFB } from "../redux/modules/user";
+import { loginFB, loginCheckFB } from "../redux/modules/user";
 import { actionCreators as userActions } from "../redux/modules/user";
 const Login = () => {
   const navigate = useNavigate();
@@ -13,10 +13,16 @@ const Login = () => {
   const [id, setId] = React.useState('');
   const [password, setPassword] = React.useState('');
 
+  // const loginCK = () => {
+  //   dispatch(loginCheckFB(
+  //   ))
+  // }
+
   const loginDB = async () => {
     await dispatch(loginFB(
       id, password
-    )).then(() => {
+    ))
+    .then(() => {
       loginCheckFB();
     })
   }
@@ -26,10 +32,7 @@ const Login = () => {
   //   ))
   // }
 
-  const loginCK = () => {
-    dispatch(loginCheckFB(
-    ))
-  }
+  
   // initializeUserInfo = async () => {
   //   const loggedInfo = storage.get('loggedInfo');
   //   if(!loggedInfo) return;
