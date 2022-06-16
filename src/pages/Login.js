@@ -10,9 +10,19 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [id, setId] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [id, setId] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
+  const loginDB = () => {
+    dispatch(loginFB(
+      id, password
+    ))
+  }
+
+  const loginCK = () => {
+    dispatch(loginCheckFB(
+    ))
+  }
   // initializeUserInfo = async () => {
   //   const loggedInfo = storage.get('loggedInfo');
   //   if(!loggedInfo) return;
@@ -47,7 +57,11 @@ const Login = () => {
 
       <Button
         onClick={() => {
-          dispatch(userActions.loginCheckFB());
+          loginDB();
+          window.setTimeout(() => {
+            loginCK();
+          }, 1000);
+          //dispatch(userActions.loginCheckFB());
           navigate("../");
         }}
       >
