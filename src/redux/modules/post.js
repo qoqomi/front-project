@@ -65,12 +65,12 @@ const addPostFB = (title, description, fileName, day) => {
           title: title,
           description: description,
           image: fileName,
-          day: day
+          day: day,
         },
         {
           headers: {
-            'Authorization': ` ${localStorage.getItem("token")}`
-          }
+            Authorization: ` ${localStorage.getItem("token")}`,
+          },
         }
       )
       .then(function (res2) {
@@ -94,26 +94,6 @@ const addPostFB = (title, description, fileName, day) => {
   };
 };
 
-// const deleteOnePostFB = (id) => {
-//   return function (dispatch, getState) {
-//     axios
-//       .delete(
-//         "http://localhost:5001/times/" + id
-//         // {
-//         // headers: {
-//         //   Authorization: `Bearer ${localStorage.getItem("token")}`,
-//         // },
-//         // }
-//       )
-//       .then(function (response) {
-//         console.log("delete res !! ", response);
-//       })
-//       .catch(function (error) {
-//         console.log(error);
-//       });
-//   };
-// };
-
 const updateOnePostFB = (id, title, description, fileName) => {
   return async function (dispatch, getState) {
     await axios
@@ -124,10 +104,10 @@ const updateOnePostFB = (id, title, description, fileName) => {
 
           title: title,
           description: description,
-          image: fileName
+          image: fileName,
         },
         {
-          headers: { 'Authorization': ` ${localStorage.getItem("token")}` }
+          headers: { Authorization: ` ${localStorage.getItem("token")}` },
         }
       )
       .then(function (res) {

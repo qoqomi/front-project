@@ -2,19 +2,16 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import {
-  addPost,
-  addPostFB,
-  actionCreators,
-  updateOnePostFB,
-} from "../redux/modules/post";
+import { Route } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Write = (props) => {
-  const { id } = useParams();
-  const is_edit = id ? true : false;
-  // console.log(is_edit);
+  const id = useParams();
+  console.log(id.id);
+
+  const is_edit = id.id ? true : false;
+  console.log(is_edit);
   const _post = is_edit;
   // console.log(id);
 
@@ -45,13 +42,14 @@ const Write = (props) => {
       return window.alert("내용을 입력해주세요.");
     } else {
       dispatch(postActions.addPostFB(title, description, fileName, day));
-      history.push("../");
+      history.push("/");
     }
   };
 
   const editOnClick = () => {
-    dispatch(postActions.updateOnePostFB(id, title, description, fileName));
-    history.push("../");
+    console.log(id.id, title, description, fileName);
+    dispatch(postActions.updateOnePostFB(id.id, title, description, fileName));
+    history.push("/");
   };
 
   return (

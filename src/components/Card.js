@@ -43,7 +43,7 @@ const Card = ({ data }) => {
                   icon={faFilePen}
                   style={{ color: "#1e1e1e", fontSize: "15px" }}
                   onClick={() => {
-                    history.push(`/notice/write/${data.id}`);
+                    history.push("/notice/edit/" + `${data.id}`);
                   }}
                 />
                 <FontAwesomeIcon

@@ -88,6 +88,8 @@ export const loginFB = (username, password) => {
 export const LogoutFB = () => {
   return function (dispatch, getState, { history }) {
     dispatch(Logout());
+    history.push("/");
+    window.alert("로그아웃 되었습니다.");
   };
 };
 
@@ -100,9 +102,8 @@ export const loginCheckFB = () => {
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case "user/LOG_IN":
-      state.is_login = true;
       state.token = action.token;
-      console.log(state.is_login);
+      console.log("들어옴");
       console.log(state.token);
       console.log(state);
       return state;
@@ -117,9 +118,9 @@ export default function reducer(state = initialState, action = {}) {
 
     case "user/LOG_OUT":
       state.is_login = false;
-      localStorage.removeItem("userId");
-      localStorage.removeItem("nickname");
       localStorage.removeItem("token");
+      localStorage.removeItem("username");
+
       return state;
 
     default:

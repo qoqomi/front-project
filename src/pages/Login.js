@@ -17,10 +17,6 @@ const Login = () => {
     console.log("들어옴");
     dispatch(loginFB(id, password));
     history.push("/");
-    // dispatch(loginFB(id, password)).then((response) => {
-    //   console.log(response);
-    //   // loginCheckFB();
-    // });
   };
 
   //만약
@@ -28,27 +24,6 @@ const Login = () => {
   // const loginCK = () => {
   //   dispatch(loginCheckFB(
   //   ))
-  // }
-
-  // const loginCK = () => {
-  //   dispatch(loginCheckFB());
-  // };
-  // initializeUserInfo = async () => {
-  //   const loggedInfo = storage.get('loggedInfo');
-  //   if(!loggedInfo) return;
-
-  // const { UserActions } = this.props;
-  // UserActions.setLoggedInfo(loggedInfo);
-  // try {
-  // await UserActions.checkStatus();
-  // } catch (e) {
-  //     storage.remove('loggedInfo');
-  //     window.location.href = '/auth/login?expired';
-  // }
-  // }
-
-  // componentDidMount() {
-  //   this.initializeUserInfo();
   // }
 
   return (
