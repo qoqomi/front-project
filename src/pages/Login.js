@@ -13,7 +13,7 @@ const Login = () => {
   const [id, setId] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  const login = () => {
+  const loginDB = () => {
     dispatch(loginFB(
       id, password
     ))
@@ -60,8 +60,10 @@ const Login = () => {
       > */}
       <Button
         onClick={() => {
-          login();
-          loginCK();
+          loginDB();
+          window.setTimeout(() => {
+            loginCK();
+          }, 1000);
           navigate("../");
         }}
       >

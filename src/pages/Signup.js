@@ -50,7 +50,7 @@ const Signup = () => {
   const signUpForm = () => {
     console.log("보낸다");
 
-    dispatch(createAction.signupFB(username, password, nickname, passwordCk));
+    // dispatch(createAction.signupFB(username, password, nickname, passwordCk));
   };
 
   // React.useEffect(() => {
@@ -70,7 +70,7 @@ const Signup = () => {
           required
           placeholder="아이디"
           onChange={(e) => {
-            setId(e.target.value);
+            // setId(e.target.value);
 
             setUsername(e.target.value);
           }}

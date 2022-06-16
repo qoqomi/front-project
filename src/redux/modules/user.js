@@ -83,7 +83,7 @@ export const loginCheckFB = () => {
         axios.get('/api/user/info',
             {
                 headers: { 'Authorization': ` ${localStorage.getItem("token")}` }
-            },
+            }
         )
         .then(function (response) {
             const username = response.data
