@@ -58,6 +58,7 @@ export const loginFB = (username, password) => {
         const token = response.data;
         // console.log(response.data);
         localStorage.setItem("token", token);
+
         //username
         axios
           .get("/api/user/info", {
@@ -65,10 +66,11 @@ export const loginFB = (username, password) => {
           })
           .then(function (response) {
             const username = response.data;
-
-            localStorage.setItem("username", username);
             console.log(username);
+            localStorage.setItem("username", username);
+
             console.log("logincheckFB !! ", response);
+            window.alert(username + "님 접속을 환영 합니다.");
             dispatch(Logincheck(username));
           })
           .catch(function (error) {
@@ -82,6 +84,12 @@ export const loginFB = (username, password) => {
   };
 };
 
+export const LogoutFB = () => {
+  return function (dispatch, getState, { history }) {
+    dispatch(Logout());
+  };
+};
+
 // 토큰 해독
 export const loginCheckFB = () => {
   // return function (dispatch, getState, { history }) {
@@ -90,21 +98,30 @@ export const loginCheckFB = () => {
 // Reducer
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
-    // case "post/LOAD": {
-    //     return { list: action.post_list }
-    // }
+    case "user/LOG_IN":
+      state.is_login = true;
+      state.token = action.token;
+      console.log(state.is_login);
+      console.log(state.token);
+      console.log(state);
+      return state;
 
-    // case "post/CREATE": {
-    //     const new_list = [...state.list];
-    //     return { list: new_list };
-    // }
+    case "user/LOGIN_CHECK":
+      state.userId = action.userId;
+      state.nickname = action.nickname;
+      console.log(state.userId);
+
+      console.log(state);
+      return state;
+
+    case "user/LOG_OUT":
+      state.is_login = false;
+      localStorage.removeItem("userId");
+      localStorage.removeItem("nickname");
+      localStorage.removeItem("token");
+      return state;
 
     default:
       return state;
   }
 }
-
-export const actionCreators = {
-  loginFB,
-  loginCheckFB,
-};
