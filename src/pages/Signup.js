@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 // import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 // import { useDispatch, useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
@@ -21,7 +21,7 @@ const Signup = () => {
   //   return _reg2.test(password);
   // }
 
-  const navigate = useNavigate();
+  const history = useHistory();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [passwordCk, setPasswordCk] = React.useState("");
@@ -46,7 +46,7 @@ const Signup = () => {
       alert("빈칸을 입력해주세요");
     } else {
       dispatch(signupDB(username, password, passwordCk, nickname));
-      navigate("/user/login");
+      history.push("/user/login");
     }
   };
 

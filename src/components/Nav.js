@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import logo from "../images/coc_logo.png";
 
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 const Nav = () => {
-  const navigate = useNavigate();
+  const history = useHistory();
   const dispatch = useDispatch();
 
   // 로그아웃
@@ -26,7 +26,7 @@ const Nav = () => {
       <Logo
         src={logo}
         onClick={() => {
-          navigate("./");
+          history.push("/");
         }}
       />
 
@@ -35,14 +35,14 @@ const Nav = () => {
           <Button
             onClick={() => {
               handlelouOut();
-              navigate("/");
+              history.push("/");
             }}
           >
             로그아웃
           </Button>
           <ButtonWrite
             onClick={() => {
-              navigate("/notice/write");
+              history.push("/notice/write");
             }}
           >
             새 글 작성
@@ -52,7 +52,7 @@ const Nav = () => {
         <User>
           <Button
             onClick={() => {
-              navigate("/user/login");
+              history.push("/user/login");
             }}
           >
             로그인
@@ -82,7 +82,7 @@ const Logo = styled.img`
 
 const User = styled.div`
   position: absolute;
-  top: 14px;
+  top: 10px;
   right: 20px;
 `;
 
