@@ -8,11 +8,11 @@ import {
   faFilePen,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { deletePost } from "../redux/modules/post";
 const Card = ({ data }) => {
-  const navigate = useNavigate();
+  const history = useHistory();
   const dispatch = useDispatch();
   // const { title, description, image, id, index } = props;
 
@@ -43,7 +43,7 @@ const Card = ({ data }) => {
                   icon={faFilePen}
                   style={{ color: "#1e1e1e", fontSize: "15px" }}
                   onClick={() => {
-                    navigate(`/notice/write/${data.id}`);
+                    history.push(`/notice/write/${data.id}`);
                   }}
                 />
                 <FontAwesomeIcon
@@ -55,7 +55,7 @@ const Card = ({ data }) => {
                   }}
                   onClick={() => {
                     dispatch(postActions.deleteOnePostFB(data.id));
-                    navigate("/");
+                    history.push("/");
                   }}
                 />
               </span>

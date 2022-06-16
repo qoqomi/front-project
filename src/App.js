@@ -1,13 +1,12 @@
 import React from "react";
 
-import { Routes, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Write from "./pages/Write";
 import Nav from "./components/Nav";
 import { actionCreators as postActions } from "./redux/modules/post";
-import { useNavigate } from "react-router-dom";
 import { getPostFB } from "./redux/modules/post";
 import { useDispatch } from "react-redux";
 
@@ -17,7 +16,7 @@ import { loginFB, loginCheckFB } from "./redux/modules/user";
 import axios from "axios";
 
 function App() {
-  const navigate = useNavigate();
+  const history = useHistory();
   const dispatch = useDispatch();
   const is_token = localStorage.getItem("token");
   console.log(is_token);
@@ -37,13 +36,13 @@ function App() {
   return (
     <div className="App">
       <Nav />
-      <Routes>
-        <Route path="/" element={<Main />}></Route>
-        <Route path="/user/login" element={<Login />}></Route>
-        <Route path="/user/signup" element={<Signup />}></Route>
-        <Route path="/notice/write" element={<Write />}></Route>
-        <Route path="/notice/write/:id" element={<Write />}></Route>
-      </Routes>
+      <Switch>
+        <Route path="/" component={Main} exact></Route>
+        <Route path="/user/login" component={Login}></Route>
+        <Route path="/user/signup" component={Signup}></Route>
+        <Route path="/notice/write" component={Write}></Route>
+        <Route path="/notice/write/:id" component={Write}></Route>
+      </Switch>
     </div>
   );
 }

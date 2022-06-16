@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
   addPost,
   addPostFB,
@@ -20,7 +20,7 @@ const Write = (props) => {
 
   const post = useSelector((state) => state.post.list);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const history = useHistory();
   const [title, setTitle] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [fileName, setFileName] = React.useState("");
@@ -45,13 +45,13 @@ const Write = (props) => {
       return window.alert("내용을 입력해주세요.");
     } else {
       dispatch(postActions.addPostFB(title, description, fileName, day));
-      navigate("../");
+      history.push("../");
     }
   };
 
   const editOnClick = () => {
     dispatch(postActions.updateOnePostFB(id, title, description, fileName));
-    navigate("../");
+    history.push("../");
   };
 
   return (
