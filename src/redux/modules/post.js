@@ -1,4 +1,5 @@
 import axios from "axios";
+import instance from "../../shared/api";
 
 const LOAD = "post/LOAD";
 const CREATE = "post/CREATE";
@@ -37,8 +38,8 @@ const getPostFB = () => {
     let post_list = [];
 
     await axios
-      .get("/api/notice")
-      .then(function (response) {
+      instance.get("/api/notice")
+      instance.then(function (response) {
         // console.log("게시물조회", response.data);
         let postDB = response.data;
 
@@ -58,7 +59,7 @@ const getPostFB = () => {
 const addPostFB = (title, description, fileName, day) => {
   return async function (dispatch, getState) {
     await axios
-      .post(
+    instance.post(
         "/api/notice/write",
         {
           title: title,
@@ -96,7 +97,7 @@ const addPostFB = (title, description, fileName, day) => {
 const updateOnePostFB = (id, title, description, fileName) => {
   return async function (dispatch, getState) {
     await axios
-      .patch(
+    instance.patch(
         "/api/notice/change/" + id,
         {
           // 이미 back-server에서 ID 값을 만들어주기 때문에 따로 id값을 넣어주지 않는다.
@@ -130,11 +131,14 @@ const updateOnePostFB = (id, title, description, fileName) => {
 const deleteOnePostFB = (id) => {
   return async function (dispatch, getState) {
     await axios
-      .delete("/api/notice/del/" + id, {
-        headers: {
-          Authorization: ` ${localStorage.getItem("token")}`,
-        },
-      })
+    instance.delete(
+        "/api/notice/del/" + id,
+        {
+          headers: {
+            'Authorization' : ` ${localStorage.getItem("token")}`
+          }
+        }
+      )
       .then(function (response) {
         console.log("delete res !! ", id);
 

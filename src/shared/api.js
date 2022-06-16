@@ -1,12 +1,15 @@
 import axios from "axios";
 
-const api = axios.create({
-  // baseURL: "http://15.165.160.84/api/user/login",
-  headers: {
-    "content-type": "application/json;charset=UTF-8",
-    accept: "application/json,",
-  },
+const instance = axios.create({
+  baseURL: "http://15.165.160.84"
+  // headers: {
+  //   "content-type": "application/json;charset=UTF-8",
+  //   accept: "application/json,",
+  // },
 });
+
+// instance.defaults.headers.common["Authorization"] = USER_TOKEN; 
+
 //토큰
 // api.interceptors.request.use(function (config) {
 //   const accessToken = document.cookie.split("=")[1];
@@ -44,3 +47,5 @@ const api = axios.create({
 //   userPassword: (pw) => api.post(`/myinfo`, pw),
 //   userNewPassword: (pw) => api.put(`/myinfo`, pw),
 // };
+
+export default instance;
