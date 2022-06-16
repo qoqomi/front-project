@@ -26,9 +26,6 @@ export function deletePost(post_delete) {
   // console.log("삭제시작💡", post_delete);
   return { type: DELETE, post_delete };
 }
-// export function deletePost(post_delete) {
-//   return { type: DELETE, post_delete };
-// }
 
 //Middlewares
 // axios로 back server에 데이터를 보내주고 리덕스에도 저장한다.
@@ -37,9 +34,10 @@ const getPostFB = () => {
   return async function (dispatch, getState) {
     let post_list = [];
 
-    await axios
-      instance.get("/api/notice")
-      instance.then(function (response) {
+    await axios;
+    instance.get("/api/notice");
+    instance
+      .then(function (response) {
         // console.log("게시물조회", response.data);
         let postDB = response.data;
 
@@ -58,8 +56,9 @@ const getPostFB = () => {
 
 const addPostFB = (title, description, fileName, day) => {
   return async function (dispatch, getState) {
-    await axios
-    instance.post(
+    await axios;
+    instance
+      .post(
         "/api/notice/write",
         {
           title: title,
@@ -96,8 +95,9 @@ const addPostFB = (title, description, fileName, day) => {
 
 const updateOnePostFB = (id, title, description, fileName) => {
   return async function (dispatch, getState) {
-    await axios
-    instance.patch(
+    await axios;
+    instance
+      .patch(
         "/api/notice/change/" + id,
         {
           // 이미 back-server에서 ID 값을 만들어주기 때문에 따로 id값을 넣어주지 않는다.
@@ -130,15 +130,13 @@ const updateOnePostFB = (id, title, description, fileName) => {
 
 const deleteOnePostFB = (id) => {
   return async function (dispatch, getState) {
-    await axios
-    instance.delete(
-        "/api/notice/del/" + id,
-        {
-          headers: {
-            'Authorization' : ` ${localStorage.getItem("token")}`
-          }
-        }
-      )
+    await axios;
+    instance
+      .delete("/api/notice/del/" + id, {
+        headers: {
+          Authorization: ` ${localStorage.getItem("token")}`,
+        },
+      })
       .then(function (response) {
         console.log("delete res !! ", id);
 
@@ -149,26 +147,7 @@ const deleteOnePostFB = (id) => {
       });
   };
 };
-// const deleteOnePostFB = (id) => {
-//   return function (dispatch, getState) {
-//     // const token = localStorage.getItem("token");
-//     // console.log(token);
-//     axios
-//       .delete(
-//         "http://localhost:5001/times/" + id
-//         // {
-//         // headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-//         // }
-//       )
-//       .then(function (response) {
-//         dispatch(deletePost(response.data));
-//         console.log(response);
-//       })
-//       .catch(function (err) {
-//         alert(err.response.data.errorMessage);
-//       });
-//   };
-// };
+
 const initialState = {
   list: [
     // {

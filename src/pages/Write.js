@@ -2,18 +2,16 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Route } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+
 const Write = (props) => {
   const id = useParams();
   console.log(id.id);
 
   const is_edit = id.id ? true : false;
   console.log(is_edit);
-  const _post = is_edit;
-  // console.log(id);
 
   const post = useSelector((state) => state.post.list);
   const dispatch = useDispatch();

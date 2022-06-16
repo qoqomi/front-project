@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createAction } from "redux-actions";
+
 import instance from "../../shared/api";
 
 // Actions
@@ -27,8 +27,9 @@ export const Logout = () => {
 export const signupDB = (username, password, passwordCk, nickname) => {
   console.log(username, password, passwordCk);
   return async function (dispatch, getState, { history }) {
-    await axios
-    instance.post("/api/user/signup", {
+    await axios;
+    instance
+      .post("/api/user/signup", {
         username: username,
         password: password,
         passwordCk: passwordCk,
@@ -47,11 +48,11 @@ export const signupDB = (username, password, passwordCk, nickname) => {
   };
 };
 
-// 로그인 합치기전
 export const loginFB = (username, password) => {
   return async function (dispatch, getState, { history }) {
-    await axios
-    instance.post("/api/user/login", {
+    await axios;
+    instance
+      .post("/api/user/login", {
         username: username,
         password: password,
       })
@@ -103,16 +104,11 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case "user/LOG_IN":
       state.token = action.token;
-      console.log("들어옴");
-      console.log(state.token);
-      console.log(state);
+
       return state;
 
     case "user/LOGIN_CHECK":
       state.userId = action.userId;
-      state.nickname = action.nickname;
-      console.log(state.userId);
-
       console.log(state);
       return state;
 

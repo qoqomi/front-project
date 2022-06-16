@@ -3,9 +3,8 @@ import styled from "styled-components";
 
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { loginFB } from "../redux/modules/user";
 
-import { loginCheckFB, loginFB } from "../redux/modules/user";
-import { actionCreators as userActions } from "../redux/modules/user";
 const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -14,17 +13,9 @@ const Login = () => {
   const [password, setPassword] = React.useState("");
 
   const loginDB = () => {
-    console.log("들어옴");
     dispatch(loginFB(id, password));
     history.push("/");
   };
-
-  //만약
-
-  // const loginCK = () => {
-  //   dispatch(loginCheckFB(
-  //   ))
-  // }
 
   return (
     <Wrap>
