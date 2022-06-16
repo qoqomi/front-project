@@ -13,7 +13,7 @@ const Nav = () => {
   const handlelouOut = () => {
     localStorage.removeItem("token");
     // localStorage.removeItem("username");
-  }
+  };
 
   // 로그인 체크
   // React.useEffect(() => {
@@ -32,10 +32,14 @@ const Nav = () => {
       {/* {localStorage.token ? ( */}
       {localStorage.token ? (
         <User>
-          <Button onClick={() => {
-            handlelouOut();
-            navigate('/');
-          }}>로그아웃</Button>
+          <Button
+            onClick={() => {
+              handlelouOut();
+              navigate("/");
+            }}
+          >
+            로그아웃
+          </Button>
           <ButtonWrite
             onClick={() => {
               navigate("/notice/write");
@@ -48,7 +52,7 @@ const Nav = () => {
         <User>
           <Button
             onClick={() => {
-              navigate("/api/user/login");
+              navigate("/user/login");
             }}
           >
             로그인

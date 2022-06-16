@@ -29,7 +29,6 @@ function App() {
   }, []);
   //실제 연결되는 서버
   React.useEffect(() => {
-
     // if (is_token){
     //   dispatch(userActions.loginCheckFB());
     // }
@@ -83,10 +82,10 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Main />}></Route>
-        <Route path="/api/user/login" exact element={<Login />}></Route>
-        <Route path="/api/user/signup" exact element={<Signup />}></Route>
-        <Route path="/notice/write" exact element={<Write />}></Route>
-        <Route path="/notice/write/:id" exact element={<Write />}></Route>
+        <Route path="/user/login" element={<Login />}></Route>
+        <Route path="/user/signup" element={<Signup />}></Route>
+        <Route path="/notice/write" element={<Write />}></Route>
+        <Route path="/notice/write/:id" element={<Write />}></Route>
       </Routes>
     </div>
   );
