@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { actionCreators as userActions } from "../redux/modules/user";
-
+import { signupDB } from "../redux/modules/user";
 const Signup = () => {
   const dispatch = useDispatch();
 
@@ -46,11 +46,22 @@ const Signup = () => {
   //   // }
   //   return true;
   // }
-
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    if (name === "username") {
+      setUsername(value);
+    } else if (name === "password") {
+      setPassword(value);
+    } else if (name === "passwordCk") {
+      setPasswordCk(value);
+    } else if (name === "nickname") {
+      setNickname(value);
+    }
+  };
   const signUpForm = () => {
     console.log("보낸다");
 
-    dispatch(createAction.signupFB(username, password, nickname, passwordCk));
+    dispatch(signupDB(username, password, nickname, passwordCk));
   };
 
   // React.useEffect(() => {
@@ -63,49 +74,41 @@ const Signup = () => {
 
   return (
     <Wrap>
-      <div>
-        <H4>회원가입</H4>
-        <Input
-          type="text"
-          required
-          placeholder="아이디"
-          onChange={(e) => {
-            setId(e.target.value);
+      <H4>회원가입</H4>
+      <Input
+        type="text"
+        name="username"
+        required
+        placeholder="아이디"
+        value={username}
+        onChange={onChange}
+      />
+      <Input
+        type="password"
+        required
+        placeholder="비밀번호(6자리 이상)"
+        name="password"
+        value={password}
+        onChange={onChange}
+      />
+      <Input
+        type="password"
+        required
+        placeholder="비밀번호 확인"
+        name="passwordCk"
+        value={passwordCk}
+        onChange={onChange}
+      />
+      <Input
+        type="text"
+        required
+        placeholder="닉네임"
+        value={nickname}
+        name="nickname"
+        onChange={onChange}
+      />
 
-            setUsername(e.target.value);
-          }}
-        />
-        <Input
-          type="password"
-          required
-          placeholder="비밀번호(6자리 이상)"
-          onChange={(e) => {
-            setPassword(e.target.value);
-
-            console.log(password);
-          }}
-        />
-        <Input
-          type="password"
-          required
-          placeholder="비밀번호 확인"
-          onChange={(e) => {
-            setPasswordCk(e.target.value);
-          }}
-        />
-        <Input
-          type="text"
-          required
-          placeholder="닉네임"
-          onChange={(e) => {
-            setNickname(e.target.value);
-          }}
-        />
-
-        <Button type="submit" onClick={signUpForm()}>
-          회원가입 하기
-        </Button>
-      </div>
+      <Button onClick={signUpForm}>회원가입 하기</Button>
     </Wrap>
   );
 };

@@ -4,20 +4,14 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { loginFB, loginCheckFB } from "../redux/modules/user";
-
+import { loginCheckFB } from "../redux/modules/user";
+import { actionCreators as userActions } from "../redux/modules/user";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [id, setId] = React.useState("");
   const [password, setPassword] = React.useState("");
-
-  const login = () => {
-    // dispatch(loginFB(
-    //   id, password
-    // ))
-  };
 
   // initializeUserInfo = async () => {
   //   const loggedInfo = storage.get('loggedInfo');
@@ -40,12 +34,16 @@ const Login = () => {
   return (
     <Wrap>
       <H4>로그인</H4>
-      <Input type="text" placeholder="아이디" onChange={
-        (e) => setId(e.target.value)
-      } />
-      <Input type="password" placeholder="비밀번호(6자리 이상)" onChange={
-        (e) => setPassword(e.target.value)
-      } />
+      <Input
+        type="text"
+        placeholder="아이디"
+        onChange={(e) => setId(e.target.value)}
+      />
+      <Input
+        type="password"
+        placeholder="비밀번호(6자리 이상)"
+        onChange={(e) => setPassword(e.target.value)}
+      />
       {/* <Button
         onClick={() => {
           login();
@@ -55,8 +53,7 @@ const Login = () => {
       > */}
       <Button
         onClick={() => {
-          login();
-          loginCheckFB();
+          dispatch(userActions.loginCheckFB());
           navigate("../");
         }}
       >
