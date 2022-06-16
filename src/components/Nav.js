@@ -16,12 +16,6 @@ const Nav = () => {
     localStorage.removeItem("username");
   };
 
-  // 로그인 체크
-  // React.useEffect(() => {
-  //   dispatch(loginCheckFB(
-  //   ))
-  // }, []);
-
   return (
     <Navbar>
       <Logo
@@ -96,10 +90,6 @@ const Button = styled.button`
   transition: all 0.25s ease-in 0s;
   font-weight: bold;
 
-  /* margin: 0 6px;
-  padding: 4px 10px;
-  border: none;
-  border-radius: 6px; */
   &:hover {
     background-color: #1e1e1e;
     color: white;
@@ -114,10 +104,6 @@ const ButtonWrite = styled.button`
   transition: all 0.25s ease-in 0s;
   font-weight: bold;
 
-  /* margin: 0 6px;
-  padding: 4px 10px;
-  border: none;
-  border-radius: 6px; */
   &:hover {
     background-color: #1e1e1e;
     color: white;

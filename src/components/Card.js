@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHeart,
@@ -10,11 +10,10 @@ import {
 
 import { useHistory } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
-import { deletePost } from "../redux/modules/post";
+
 const Card = ({ data }) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  // const { title, description, image, id, index } = props;
 
   const [images, setImages] = React.useState(data.image);
 

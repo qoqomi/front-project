@@ -7,26 +7,18 @@ import Signup from "./pages/Signup";
 import Write from "./pages/Write";
 import Nav from "./components/Nav";
 import { actionCreators as postActions } from "./redux/modules/post";
-import { getPostFB } from "./redux/modules/post";
 import { useDispatch } from "react-redux";
 
 function App() {
-  const history = useHistory();
   const dispatch = useDispatch();
   const is_token = localStorage.getItem("token");
   console.log(is_token);
-  // const is_token = localStorage.getItem("token") ? true : false;
 
   //실제로 연결되어있는 데이터
   React.useEffect(() => {
     dispatch(postActions.getPostFB());
   }, []);
   //실제 연결되는 서버
-  React.useEffect(() => {
-    // if (is_token){
-    //   dispatch(userActions.loginCheckFB());
-    // }
-  }, []);
 
   return (
     <div className="App">

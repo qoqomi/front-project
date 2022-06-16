@@ -1,14 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-
-// import { useState } from "react";
 import { useHistory } from "react-router-dom";
-
-// import { useDispatch, useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
-
-import { actionCreators as userActions } from "../redux/modules/user";
 import { signupDB } from "../redux/modules/user";
+
 const Signup = () => {
   const dispatch = useDispatch();
 
@@ -32,21 +27,12 @@ const Signup = () => {
   };
 
   const signUpForm = () => {
-    // console.log("보낸다");
     if (username === "" || password === "" || passwordCk === "") {
       alert("빈칸을 입력해주세요");
     } else {
       dispatch(signupDB(username, password, passwordCk, nickname));
     }
   };
-
-  // React.useEffect(() => {
-  //   if (is_token) {
-
-  //     dispatch(userActions.loginCheckFB());
-
-  //   }
-  // }, []);
 
   return (
     <Wrap>
