@@ -27,25 +27,6 @@ const Signup = () => {
   const [passwordCk, setPasswordCk] = React.useState("");
   const [nickname, setNickname] = React.useState("");
 
-  // const passwordCheck = (password) => {
-  //   // let _reg2 = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
-  //   var _reg2 = /[0-9]/g;
-
-  //   return _reg2.test(password);
-  // };
-
-  // function passwordCheck(password) {
-  //   if (!/^[a-zA-Z0-9]{6,20}$/.test(password)) {
-  //     return false;
-  //   }
-  //   // var chk_num = password.search(/[0-9]/g);
-  //   // var chk_eng = password.search(/[a-z]/ig);
-  //   // if (chk_num < 0 || chk_eng < 0) {
-  //   //   alert("비밀번호는 숫자와 영문을 혼용하여야 합니다.");
-  //   //   return false;
-  //   // }
-  //   return true;
-  // }
   const onChange = (e) => {
     const { value, name } = e.target;
     if (name === "username") {
@@ -58,10 +39,15 @@ const Signup = () => {
       setNickname(value);
     }
   };
+
   const signUpForm = () => {
     console.log("보낸다");
-
-    dispatch(signupDB(username, password, nickname, passwordCk));
+    if (username === "" || password === "" || passwordCk === "") {
+      alert("빈칸을 입력해주세요");
+    } else {
+      dispatch(signupDB(username, password, nickname, passwordCk));
+      navigate("/user/login");
+    }
   };
 
   // React.useEffect(() => {
