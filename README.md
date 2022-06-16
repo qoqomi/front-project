@@ -1,20 +1,19 @@
 # 📚Co.C (코딩씨게하자)
 
+<br>
+
 ## 제작 기간 & 팀원 소개
 
 - 2022.06.10 ~ 2022.06.16
 - Front-end : 유승연, 이병수
 - Back-end : 이정우, 박성규, 이경동
+  <br>
 
 ## 플랫폼소개
 
 코린이를 위한 TIL 저장소 !
 여러 정보를 교류하고 배워가는 플랫폼입니다.  
 <a href="" target="">프로젝트 페이지 바로가기</a>
-
-<br>
-<hr>
-<br>
 
  <br>
  <br>
@@ -27,16 +26,9 @@
 - Redux-thunk
 - React-router-dom
 - Styled-component
-### 배포
-- AWS S3
-
- <br>
+ 
  <br>
  
-## 실행 화면
-
- <br>
- <br>
  
 ## 핵심기능
 
