@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAction } from "redux-actions";
+import instance from "../../shared/api";
 
 // Actions
 const LOG_IN = "user/LOG_IN";
@@ -27,7 +28,7 @@ export const signupDB = (username, password, passwordCk, nickname) => {
   console.log(username, password, passwordCk);
   return async function (dispatch, getState, { history }) {
     await axios
-      .post("/api/user/signup", {
+    instance.post("/api/user/signup", {
         username: username,
         password: password,
         passwordCk: passwordCk,
@@ -50,7 +51,7 @@ export const signupDB = (username, password, passwordCk, nickname) => {
 export const loginFB = (username, password) => {
   return async function (dispatch, getState, { history }) {
     await axios
-      .post("/api/user/login", {
+    instance.post("/api/user/login", {
         username: username,
         password: password,
       })
@@ -93,8 +94,6 @@ export const LogoutFB = () => {
 };
 
 // 토큰 해독
-// export const loginCheckFB = () => {
-//   // return function (dispatch, getState, { history }) {
 export const loginCheckFB = () => {
   // return function (dispatch, getState, { history }) {
 };
