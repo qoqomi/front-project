@@ -25,11 +25,8 @@
 - Redux-thunk
 - React-router-dom
 - Styled-component
-
  
-## 실행 화면
-
- 
+ <br>
 ## 핵심기능
 
 ### 이미지 Url 기능
