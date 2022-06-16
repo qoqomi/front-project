@@ -8,7 +8,8 @@ import { useDispatch } from "react-redux";
 const Nav = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-
+  const token = localStorage.getItem("token") ? true : false;
+  console.log(token);
   // 로그아웃
   const handlelouOut = () => {
     localStorage.removeItem("token");
@@ -30,7 +31,7 @@ const Nav = () => {
         }}
       />
 
-      {localStorage.token ? (
+      {token ? (
         <User>
           <Button
             onClick={() => {
