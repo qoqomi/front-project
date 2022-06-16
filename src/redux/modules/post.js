@@ -1,4 +1,5 @@
 import axios from "axios";
+import instance from "../../shared/api";
 
 const LOAD = "post/LOAD";
 const CREATE = "post/CREATE";
@@ -33,12 +34,12 @@ export function deletePost(post_delete) {
 // axios로 back server에 데이터를 보내주고 리덕스에도 저장한다.
 
 const getPostFB = () => {
-  return function (dispatch, getState) {
+  return async function (dispatch, getState) {
     let post_list = [];
 
-    axios
-      .get("/api/notice")
-      .then(function (response) {
+    await axios
+      instance.get("/api/notice")
+      instance.then(function (response) {
         // console.log("게시물조회", response.data);
         let postDB = response.data;
 
@@ -56,9 +57,9 @@ const getPostFB = () => {
 };
 
 const addPostFB = (title, description, fileName, day) => {
-  return function (dispatch, getState) {
-    axios
-      .post(
+  return async function (dispatch, getState) {
+    await axios
+    instance.post(
         "/api/notice/write",
         {
           title: title,
@@ -114,9 +115,9 @@ const addPostFB = (title, description, fileName, day) => {
 // };
 
 const updateOnePostFB = (id, title, description, fileName) => {
-  return function (dispatch, getState) {
-    axios
-      .patch(
+  return async function (dispatch, getState) {
+    await axios
+    instance.patch(
         "/api/notice/change/" + id,
         {
           // 이미 back-server에서 ID 값을 만들어주기 때문에 따로 id값을 넣어주지 않는다.
@@ -148,9 +149,9 @@ const updateOnePostFB = (id, title, description, fileName) => {
 };
 
 const deleteOnePostFB = (id) => {
-  return function (dispatch, getState) {
-    axios
-      .delete(
+  return async function (dispatch, getState) {
+    await axios
+    instance.delete(
         "/api/notice/del/" + id,
         {
           headers: {
