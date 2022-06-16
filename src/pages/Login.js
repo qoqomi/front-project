@@ -13,11 +13,18 @@ const Login = () => {
   const [id, setId] = React.useState('');
   const [password, setPassword] = React.useState('');
 
-  const loginDB = () => {
-    dispatch(loginFB(
+  const loginDB = async () => {
+    await dispatch(loginFB(
       id, password
-    ))
+    )).then(() => {
+      loginCheckFB();
+    })
   }
+
+  // const loginCK = () => {
+  //   dispatch(loginCheckFB(
+  //   ))
+  // }
 
   const loginCK = () => {
     dispatch(loginCheckFB(
@@ -44,6 +51,31 @@ const Login = () => {
   return (
     <Wrap>
       <H4>로그인</H4>
+      <Input type="text" placeholder="아이디" onChange={
+        (e) => setId(e.target.value)
+      } />
+      <Input type="password" placeholder="비밀번호(6자리 이상)" onChange={
+        (e) => setPassword(e.target.value)
+      } />
+      <Button
+      // <Input
+      //   type="text"
+      //   placeholder="아이디"
+      //   onChange={(e) => setId(e.target.value)}
+      // />
+      // <Input
+      //   type="password"
+      //   placeholder="비밀번호(6자리 이상)"
+      //   onChange={(e) => setPassword(e.target.value)}
+      // />
+      // {/* <Button
+        onClick={() => {
+          loginDB();
+          // loginCheckFB();
+          navigate("../");
+        }}
+      >
+      {/* <Button
       <Input
         type="text"
         placeholder="아이디"
@@ -64,7 +96,7 @@ const Login = () => {
           //dispatch(userActions.loginCheckFB());
           navigate("../");
         }}
-      >
+      > */}
         로그인 하기
       </Button>
       <P>회원이 아니시라면?</P>
