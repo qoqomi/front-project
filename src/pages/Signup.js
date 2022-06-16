@@ -12,15 +12,6 @@ import { signupDB } from "../redux/modules/user";
 const Signup = () => {
   const dispatch = useDispatch();
 
-  // const is_token = localStorage.getItem("token") ? true : false;
-
-  // const passwordCheck = (password) => {
-  //   let _reg2 = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/;
-  //   var _reg2 = (/[0-9]/g);
-
-  //   return _reg2.test(password);
-  // }
-
   const history = useHistory();
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");

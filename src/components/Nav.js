@@ -31,7 +31,7 @@ const Nav = () => {
         }}
       />
 
-      {token ? (
+      {token === true ? (
         <User>
           <Button
             onClick={() => {

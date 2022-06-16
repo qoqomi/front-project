@@ -33,10 +33,10 @@ export function deletePost(post_delete) {
 // axios로 back server에 데이터를 보내주고 리덕스에도 저장한다.
 
 const getPostFB = () => {
-  return function (dispatch, getState) {
+  return async function (dispatch, getState) {
     let post_list = [];
 
-    axios
+    await axios
       .get("/api/notice")
       .then(function (response) {
         // console.log("게시물조회", response.data);
@@ -56,20 +56,20 @@ const getPostFB = () => {
 };
 
 const addPostFB = (title, description, fileName, day) => {
-  return function (dispatch, getState) {
-    axios
+  return async function (dispatch, getState) {
+    await axios
       .post(
         "/api/notice/write",
         {
           title: title,
           description: description,
           image: fileName,
-          day: day
+          day: day,
         },
         {
           headers: {
-            'Authorization': ` ${localStorage.getItem("token")}`
-          }
+            Authorization: ` ${localStorage.getItem("token")}`,
+          },
         }
       )
       .then(function (res2) {
@@ -93,29 +93,9 @@ const addPostFB = (title, description, fileName, day) => {
   };
 };
 
-// const deleteOnePostFB = (id) => {
-//   return function (dispatch, getState) {
-//     axios
-//       .delete(
-//         "http://localhost:5001/times/" + id
-//         // {
-//         // headers: {
-//         //   Authorization: `Bearer ${localStorage.getItem("token")}`,
-//         // },
-//         // }
-//       )
-//       .then(function (response) {
-//         console.log("delete res !! ", response);
-//       })
-//       .catch(function (error) {
-//         console.log(error);
-//       });
-//   };
-// };
-
 const updateOnePostFB = (id, title, description, fileName) => {
-  return function (dispatch, getState) {
-    axios
+  return async function (dispatch, getState) {
+    await axios
       .patch(
         "/api/notice/change/" + id,
         {
@@ -123,10 +103,10 @@ const updateOnePostFB = (id, title, description, fileName) => {
 
           title: title,
           description: description,
-          image: fileName
+          image: fileName,
         },
         {
-          headers: { 'Authorization': ` ${localStorage.getItem("token")}` }
+          headers: { Authorization: ` ${localStorage.getItem("token")}` },
         }
       )
       .then(function (res) {
@@ -148,16 +128,13 @@ const updateOnePostFB = (id, title, description, fileName) => {
 };
 
 const deleteOnePostFB = (id) => {
-  return function (dispatch, getState) {
-    axios
-      .delete(
-        "/api/notice/del/" + id,
-        {
-          headers: {
-            'Authorization' : ` ${localStorage.getItem("token")}`
-          }
-        }
-      )
+  return async function (dispatch, getState) {
+    await axios
+      .delete("/api/notice/del/" + id, {
+        headers: {
+          Authorization: ` ${localStorage.getItem("token")}`,
+        },
+      })
       .then(function (response) {
         console.log("delete res !! ", id);
 

@@ -10,11 +10,6 @@ import { actionCreators as postActions } from "./redux/modules/post";
 import { getPostFB } from "./redux/modules/post";
 import { useDispatch } from "react-redux";
 
-import { loginFB, loginCheckFB } from "./redux/modules/user";
-
-//axios
-import axios from "axios";
-
 function App() {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -41,7 +36,7 @@ function App() {
         <Route path="/user/login" component={Login}></Route>
         <Route path="/user/signup" component={Signup}></Route>
         <Route path="/notice/write" component={Write}></Route>
-        <Route path="/notice/write/:id" component={Write}></Route>
+        <Route path="/notice/edit/:id" component={Write}></Route>
       </Switch>
     </div>
   );
