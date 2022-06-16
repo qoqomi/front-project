@@ -3,7 +3,7 @@ import { createAction } from "redux-actions";
 
 // Actions
 const LOG_IN = "user/LOG_IN";
-
+const LOGIN_CHECK = "user/LOGIN_CHECK";
 const LOG_OUT = "user/LOG_OUT";
 
 const initialState = {
@@ -15,7 +15,9 @@ const initialState = {
 export const Login = (token) => {
   return { type: LOG_IN, token };
 };
-
+export const Logincheck = (userId) => {
+  return { type: LOGIN_CHECK, userId };
+};
 export const Logout = () => {
   return { type: LOG_OUT };
 };
@@ -23,8 +25,8 @@ export const Logout = () => {
 // 회원가입
 export const signupDB = (username, password, passwordCk, nickname) => {
   console.log(username, password, passwordCk);
-  return function (dispatch, getState) {
-    axios
+  return async function (dispatch, getState, { history }) {
+    await axios
       .post("/api/user/signup", {
         username: username,
         password: password,
@@ -35,7 +37,7 @@ export const signupDB = (username, password, passwordCk, nickname) => {
       .then(function (response) {
         const message = response.data.message;
         window.alert(message);
-        // history.replace("/login");
+        history.push("/user/login");
       })
       .catch(function (error) {
         const err_message = error.response.data.errorMessage;
@@ -46,15 +48,15 @@ export const signupDB = (username, password, passwordCk, nickname) => {
 
 // 로그인 합치기전
 export const loginFB = (username, password) => {
-  return function (dispatch, getState) {
-    axios
+  return async function (dispatch, getState) {
+    await axios
       .post("/api/user/login", {
         username: username,
         password: password,
       })
       .then(function (response) {
         const token = response.data;
-        console.log(response.data);
+        // console.log(response.data);
         localStorage.setItem("token", token);
         //username
         axios
@@ -63,28 +65,18 @@ export const loginFB = (username, password) => {
           })
           .then(function (response) {
             const username = response.data;
-            localStorage.setItem("username", username);
-            // console.log("logincheckFB !! ", response);
 
-            if (response.data) {
-              console.log(response.data);
-              dispatch(
-                LOG_IN({
-                  // username: username,
-                  // password: password,
-                  token: localStorage.getItem("token"),
-                })
-              );
-            } else {
-              dispatch(LOG_OUT());
-            }
+            localStorage.setItem("username", username);
+            console.log(username);
+            console.log("logincheckFB !! ", response);
+            dispatch(Logincheck(username));
           })
           .catch(function (error) {
             console.log("logincheckFB error !!", error);
           });
+        history.push("/user/login");
       })
       .catch(function (error) {
-        window.alert("아이디 혹은 비밀번호가 일치하지 않습니다.");
         console.log(error);
       });
   };
