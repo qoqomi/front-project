@@ -76,6 +76,18 @@ const Login = () => {
         }}
       >
       {/* <Button
+      <Input
+        type="text"
+        placeholder="아이디"
+        onChange={(e) => setId(e.target.value)}
+      />
+      <Input
+        type="password"
+        placeholder="비밀번호(6자리 이상)"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <Button
         onClick={() => {
           loginDB();
           window.setTimeout(() => {
@@ -90,7 +102,7 @@ const Login = () => {
       <P>회원이 아니시라면?</P>
       <Button
         onClick={() => {
-          navigate("/api/user/signup");
+          navigate("/user/signup");
         }}
       >
         회원가입 하기
