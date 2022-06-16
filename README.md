@@ -7,6 +7,7 @@
 - Front-end : 유승연, 이병수
 - Back-end : 이정우, 박성규, 이경동
 <br>
+
 ## 플랫폼소개
 
 코린이를 위한 TIL 저장소 !
@@ -24,16 +25,10 @@
 - Redux-thunk
 - React-router-dom
 - Styled-component
-### 배포
-- AWS S3
 
- <br>
- <br>
  
 ## 실행 화면
 
- <br>
- <br>
  
 ## 핵심기능
 
