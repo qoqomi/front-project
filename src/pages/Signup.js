@@ -41,11 +41,11 @@ const Signup = () => {
   };
 
   const signUpForm = () => {
-    console.log("보낸다");
+    // console.log("보낸다");
     if (username === "" || password === "" || passwordCk === "") {
       alert("빈칸을 입력해주세요");
     } else {
-      dispatch(signupDB(username, password, nickname, passwordCk));
+      dispatch(signupDB(username, password, passwordCk, nickname));
       navigate("/user/login");
     }
   };
