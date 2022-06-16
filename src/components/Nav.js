@@ -2,38 +2,64 @@ import React from "react";
 import styled from "styled-components";
 import logo from "../images/coc_logo.png";
 
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const Nav = () => {
-  const navigate = useNavigate();
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("token") ? true : false;
+  console.log(token);
+  // 로그아웃
+  const handlelouOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+  };
+
+  // 로그인 체크
+  // React.useEffect(() => {
+  //   dispatch(loginCheckFB(
+  //   ))
+  // }, []);
 
   return (
     <Navbar>
       <Logo
         src={logo}
         onClick={() => {
-          navigate("./");
+          history.push("/");
         }}
       />
-      {/* <User>
-          <Button>로그아웃</Button>
+
+      {token === true ? (
+        <User>
+          <Button
+            onClick={() => {
+              handlelouOut();
+              history.push("/");
+            }}
+          >
+            로그아웃
+          </Button>
           <ButtonWrite
             onClick={() => {
-              navigate("./Write");
+              history.push("/notice/write");
             }}
           >
             새 글 작성
           </ButtonWrite>
-      </User> */}
-      <User>
-        <Button
-          onClick={() => {
-            navigate("./login");
-          }}
-        >
-          로그인
-        </Button>
-      </User>
+        </User>
+      ) : (
+        <User>
+          <Button
+            onClick={() => {
+              history.push("/user/login");
+            }}
+          >
+            로그인
+          </Button>
+        </User>
+      )}
     </Navbar>
   );
 };
@@ -57,12 +83,13 @@ const Logo = styled.img`
 
 const User = styled.div`
   position: absolute;
-  top: 14px;
+  top: 10px;
   right: 20px;
 `;
 
 const Button = styled.button`
   height: 30px;
+  margin: 5px;
   border-radius: 20px;
   background-color: #f8f9fa;
   border: 1px solid white;
@@ -80,12 +107,12 @@ const Button = styled.button`
 `;
 const ButtonWrite = styled.button`
   height: 30px;
+  margin: 5px;
   border-radius: 20px;
   background-color: #f8f9fa;
   border: 1px solid white;
   transition: all 0.25s ease-in 0s;
   font-weight: bold;
-  margin-left: 10px;
 
   /* margin: 0 6px;
   padding: 4px 10px;

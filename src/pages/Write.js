@@ -1,26 +1,90 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { Route } from "react-router-dom";
+import { actionCreators as postActions } from "../redux/modules/post";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+const Write = (props) => {
+  const id = useParams();
+  console.log(id.id);
 
-import { useNavigate } from "react-router-dom";
+  const is_edit = id.id ? true : false;
+  console.log(is_edit);
+  const _post = is_edit;
+  // console.log(id);
 
-const Write = () => {
-  const navigate = useNavigate();
+  const post = useSelector((state) => state.post.list);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const [title, setTitle] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [fileName, setFileName] = React.useState("");
+
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    if (name === "title") {
+      setTitle(value);
+    } else if (name === "url") {
+      setFileName(value);
+      console.log(fileName);
+    } else if (name === "description") {
+      setDescription(value);
+    }
+  };
+
+  const addOnClick = () => {
+    let day = new Date().toString().slice(0, 21).split(" ").join();
+    if (!title || !description) {
+      return window.alert("내용을 입력해주세요.");
+    } else if (!description) {
+      return window.alert("내용을 입력해주세요.");
+    } else {
+      dispatch(postActions.addPostFB(title, description, fileName, day));
+      history.push("/");
+    }
+  };
+
+  const editOnClick = () => {
+    console.log(id.id, title, description, fileName);
+    dispatch(postActions.updateOnePostFB(id.id, title, description, fileName));
+    history.push("/");
+  };
 
   return (
     <Wrap>
-      <H4>TIL 작성</H4>
-      <Input type="text" placeholder="제목" />
-      <Textarea placeholder="내용을 입력해주세요"></Textarea>
+      <H4>{is_edit ? "TIL 수정" : "TIL 작성"}</H4>
+      <Input
+        type="text"
+        name="title"
+        value={title}
+        onChange={onChange}
+        placeholder="제목"
+      />
+      <Textarea
+        type="text"
+        name="description"
+        value={description}
+        onChange={onChange}
+        placeholder="내용을 입력해주세요"
+      ></Textarea>
       <Label>대표 이미지 선택</Label>
       {/* <Input type="file" accept="image/*" placeholder="제목" /> */}
-      <Input type="text" placeholder="이미지 url" />
-      <Button
-        onClick={() => {
-          navigate("../");
-        }}
-      >
-        등록
-      </Button>
+      <Input
+        width="100%"
+        type="text"
+        name="url"
+        placeholder="이미지 url"
+        value={fileName}
+        margin="0"
+        onChange={onChange}
+      />
+      {is_edit ? (
+        <Button onClick={editOnClick}>수정</Button>
+      ) : (
+        <Button onClick={addOnClick}>등록</Button>
+      )}
     </Wrap>
   );
 };

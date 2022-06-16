@@ -1,26 +1,90 @@
 import React from "react";
 import styled from "styled-components";
 
-import { useNavigate } from "react-router-dom";
+// import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
+// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from "react-redux";
+
+import { actionCreators as userActions } from "../redux/modules/user";
+import { signupDB } from "../redux/modules/user";
 const Signup = () => {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const history = useHistory();
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [passwordCk, setPasswordCk] = React.useState("");
+  const [nickname, setNickname] = React.useState("");
+
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    if (name === "username") {
+      setUsername(value);
+    } else if (name === "password") {
+      setPassword(value);
+    } else if (name === "passwordCk") {
+      setPasswordCk(value);
+    } else if (name === "nickname") {
+      setNickname(value);
+    }
+  };
+
+  const signUpForm = () => {
+    // console.log("보낸다");
+    if (username === "" || password === "" || passwordCk === "") {
+      alert("빈칸을 입력해주세요");
+    } else {
+      dispatch(signupDB(username, password, passwordCk, nickname));
+    }
+  };
+
+  // React.useEffect(() => {
+  //   if (is_token) {
+
+  //     dispatch(userActions.loginCheckFB());
+
+  //   }
+  // }, []);
 
   return (
     <Wrap>
       <H4>회원가입</H4>
-      <Input type="text" placeholder="아이디" />
-      <Input type="password" placeholder="비밀번호(6자리 이상)" />
-      <Input type="password" placeholder="비밀번호 확인" />
-      <Input type="text" placeholder="닉네임" />
-      <Button
-        onClick={() => {
-          navigate("../login");
-          alert("가입을 축하 합니다!");
-        }}
-      >
-        회원가입 하기
-      </Button>
+      <Input
+        type="text"
+        name="username"
+        required
+        placeholder="아이디"
+        value={username}
+        onChange={onChange}
+      />
+      <Input
+        type="password"
+        required
+        placeholder="비밀번호(6자리 이상)"
+        name="password"
+        value={password}
+        onChange={onChange}
+      />
+      <Input
+        type="password"
+        required
+        placeholder="비밀번호 확인"
+        name="passwordCk"
+        value={passwordCk}
+        onChange={onChange}
+      />
+      <Input
+        type="text"
+        required
+        placeholder="닉네임"
+        value={nickname}
+        name="nickname"
+        onChange={onChange}
+      />
+
+      <Button onClick={signUpForm}>회원가입 하기</Button>
     </Wrap>
   );
 };

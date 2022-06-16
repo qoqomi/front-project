@@ -1,27 +1,49 @@
 import React from "react";
 import styled from "styled-components";
 
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
+import { loginCheckFB, loginFB } from "../redux/modules/user";
+import { actionCreators as userActions } from "../redux/modules/user";
 const Login = () => {
-  const navigate = useNavigate();
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const [id, setId] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const loginDB = () => {
+    console.log("들어옴");
+    dispatch(loginFB(id, password));
+    history.push("/");
+  };
+
+  //만약
+
+  // const loginCK = () => {
+  //   dispatch(loginCheckFB(
+  //   ))
+  // }
 
   return (
     <Wrap>
       <H4>로그인</H4>
-      <Input type="text" placeholder="아이디" />
-      <Input type="password" placeholder="비밀번호(6자리 이상)" />
-      <Button
-        onClick={() => {
-          navigate("../");
-        }}
-      >
-        로그인 하기
-      </Button>
+      <Input
+        type="text"
+        placeholder="아이디"
+        onChange={(e) => setId(e.target.value)}
+      />
+      <Input
+        type="password"
+        placeholder="비밀번호(6자리 이상)"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <Button onClick={loginDB}>로그인 하기</Button>
       <P>회원이 아니시라면?</P>
       <Button
         onClick={() => {
-          navigate("../signup");
+          history.push("/user/signup");
         }}
       >
         회원가입 하기
