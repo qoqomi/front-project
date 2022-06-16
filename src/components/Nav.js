@@ -12,7 +12,7 @@ const Nav = () => {
   // 로그아웃
   const handlelouOut = () => {
     localStorage.removeItem("token");
-    // localStorage.removeItem("username");
+    localStorage.removeItem("username");
   };
 
   // 로그인 체크
@@ -29,7 +29,7 @@ const Nav = () => {
           navigate("./");
         }}
       />
-      {/* {localStorage.token ? ( */}
+
       {localStorage.token ? (
         <User>
           <Button

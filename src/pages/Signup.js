@@ -41,11 +41,11 @@ const Signup = () => {
   };
 
   const signUpForm = () => {
-    console.log("보낸다");
+    // console.log("보낸다");
     if (username === "" || password === "" || passwordCk === "") {
       alert("빈칸을 입력해주세요");
     } else {
-      dispatch(signupDB(username, password, nickname, passwordCk));
+      dispatch(signupDB(username, password, passwordCk, nickname));
       navigate("/user/login");
     }
   };
@@ -60,49 +60,6 @@ const Signup = () => {
 
   return (
     <Wrap>
-//       <div>
-//         <H4>회원가입</H4>
-//         <Input
-//           type="text"
-//           required
-//           placeholder="아이디"
-//           onChange={(e) => {
-//             // setId(e.target.value);
-
-//             setUsername(e.target.value);
-//           }}
-//         />
-//         <Input
-//           type="password"
-//           required
-//           placeholder="비밀번호(6자리 이상)"
-//           onChange={(e) => {
-//             setPassword(e.target.value);
-
-//             console.log(password);
-//           }}
-//         />
-//         <Input
-//           type="password"
-//           required
-//           placeholder="비밀번호 확인"
-//           onChange={(e) => {
-//             setPasswordCk(e.target.value);
-//           }}
-//         />
-//         <Input
-//           type="text"
-//           required
-//           placeholder="닉네임"
-//           onChange={(e) => {
-//             setNickname(e.target.value);
-//           }}
-//         />
-
-//         <Button type="submit" onClick={signUpForm()}>
-//           회원가입 하기
-//         </Button>
-//       </div>
       <H4>회원가입</H4>
       <Input
         type="text"
